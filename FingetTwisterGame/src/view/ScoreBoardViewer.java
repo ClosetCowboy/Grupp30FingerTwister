@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class ScoreBoardViewer extends JFrame implements Runnable {
-    public static void main(String[]args){
+  /*  public static void main(String[]args){
         new ScoreBoardViewer();
-    }
+    } **/
     private JPanel panel;
     private JTextArea textArea;
     private int count;

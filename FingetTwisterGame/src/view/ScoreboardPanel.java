@@ -5,6 +5,7 @@ import model.Scoreboard;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class ScoreboardPanel extends JPanel implements Runnable {
     private View view;
@@ -17,13 +18,13 @@ public class ScoreboardPanel extends JPanel implements Runnable {
         this.textArea = new JTextArea();
 
         JLabel scoreBoardText = new JLabel("Scoreboard");
-        Font font = new Font("BOLD", Font.BOLD, 24);
+        Font font = new Font("BOLD", Font.BOLD, 20);
         scoreBoardText.setFont(font);
         scoreBoardText.setBackground(null);
         this.add(scoreBoardText, BorderLayout.NORTH);
 
         textArea.setPreferredSize(new Dimension(400,1100));
-        Font bigFont = new Font("Italic", Font.ITALIC, 24);
+        Font bigFont = new Font("Italic", Font.ITALIC, 12);
         textArea.setFont(bigFont);
         textArea.setBackground(null);
 
@@ -46,41 +47,36 @@ public class ScoreboardPanel extends JPanel implements Runnable {
 
 
     public void setTextArea() throws IOException {
-        String str = "";
-        FileReader fr = new FileReader("ScoreBoard.txt");
-        BufferedReader br = new BufferedReader(fr);
 
-        for(int i = 0; i < br.read(); ++i) {
-            str = str + br.readLine() + "\n";
-            ++this.count;
+        this.scoreboard = view.getController().getScoreBoard();
+        String name;
+        String score;
+        String textfield = " ";
+        for(int i=0; i<scoreboard.getScoreboard().size(); i++){
+            name = scoreboard.getScoreboard().get(i).getName();
+            //  System.out.println("ScoreboardPanel");
+            //  System.out.println(name);
+            score = String.valueOf(scoreboard.getScoreboard().get(i).getScore());
+            // System.out.println(score);
+            // textfield = textfield + "Name: " + name + "Score: " + score + "\n";
+            textfield = textfield + String.format("%12s, %10s", name , score) + "\n";
         }
-
-        fr.close();
-        this.textArea.setText(str);
+        this.textArea.setText(textfield);
+        //System.out.println("TextField" + "\n" + textfield);
     }
 
     public void run() {
-        FileReader fr = null;
 
         while(true) {
-            String str = "";
-            this.count = 0;
             try {
-                fr = new FileReader("ScoreBoard.txt");
-                BufferedReader br = new BufferedReader(fr);
-
-                for (int i = 0; i < br.read(); ++i) {
-
-                    str = str + br.readLine() + "\n";
-                    ++this.count;
-                }
-
-                fr.close();
-                br.close();
-            } catch (IOException var5) {
-                var5.printStackTrace();
+                setTextArea();
+                Thread.sleep(100);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            this.textArea.setText(str);
+
 
         }
     }

@@ -2,54 +2,64 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+
+import static java.util.Collections.*;
 
 public class Scoreboard {
-    final int scoreboardSize = 15;
-    String [] scoreBoard = new String[scoreboardSize];
-    ArrayList<String> scoreboardArr;
-
-
-
+    private ArrayList<Score> scoreboard;
 
     public Scoreboard(){
-        scoreboardArr = new ArrayList<>();
+        scoreboard = new ArrayList<>();
+        String name;
+        int score;
         try {
             BufferedReader bufferedReader = new BufferedReader((new FileReader("ScoreBoard.txt")));
             for(int i = 0; i < bufferedReader.read(); ++i) {
-                scoreboardArr.add(bufferedReader.readLine());
+                name = bufferedReader.readLine();
+                //  System.out.println("ScoreBoard");
+                //   System.out.println(name);
+
+                i++;
+                score = Integer.parseInt(bufferedReader.readLine());
+                //  System.out.println(score);
+                Score newscore = new Score(name, score);
+                scoreboard.add(newscore);
+                sortScoreBoard();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
     }
     public void setNewScore(String name, int score) throws IOException {
-
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("ScoreBoard.txt", true));
-        String playerNameScore = String.format("Name:  10%s Score: 3%d", name, score);
-        bufferedWriter.write(playerNameScore);
-        bufferedWriter.newLine();
-        bufferedWriter.close();
+        Score newscore = new Score(name, score);
+        scoreboard.add(newscore);
         sortScoreBoard();
+        writeToFile();
+    }
+    public void writeToFile() throws IOException {
+        String playerName;
+        String playerScore;
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("ScoreBoard.txt", false));
+        for(int i=0; i<scoreboard.size(); i++){
+            playerName = scoreboard.get(i).getName();
+            playerScore = String.valueOf(scoreboard.get(i).getScore());
+            bufferedWriter.write(" "+playerName);
+            bufferedWriter.newLine();
+            bufferedWriter.write(playerScore);
+            bufferedWriter.newLine();
+
+        }
+        bufferedWriter.close();
     }
     public void sortScoreBoard(){
-        int minScore = 0;
-        int checkedScore;
-        int biggestScore = 0;
-        int scores[] = new int[scoreBoard.length];
-        for(int i=0; i<scoreBoard.length; i++){
-           checkedScore = Integer.parseInt(String.valueOf(scoreBoard[i].startsWith("Score: ")));
-           scores[i] = Integer.parseInt(String.valueOf(scoreboardArr.get(i).startsWith("Score: ")));
-           if(checkedScore > biggestScore ){
-                biggestScore = scores[i];
-           }
-        }
+        sort(scoreboard);
 
+    }
 
+    public ArrayList<Score> getScoreboard(){
+        return scoreboard;
     }
 
 

@@ -36,14 +36,13 @@ public class Controller implements ActionListener, Runnable {
     private Thread thread;
     //private StartingWindow startingWindow;
     private Scoreboard scoreBoard;
-   // private ScoreBoardViewer scoreBoard;
+    // private ScoreBoardViewer scoreBoard;
 
     private int keyCount;
     private GameMode2 gm2;
 
     public Controller() {
         this.view = new View(this);
-        gm2 = new GameMode2(view);
     }
 
     public void startGame() {
@@ -54,7 +53,7 @@ public class Controller implements ActionListener, Runnable {
         while(Objects.equals(this.litButton2.getText(), this.litButton1.getText())){
             this.litButton2 = this.randomize_new_button();
             this.litButton1 = this.randomize_new_button();
-       }
+        }
     }
     public JButton randomize_new_button() {
         JButton jButton = null;
@@ -104,9 +103,19 @@ public class Controller implements ActionListener, Runnable {
         }
 
     }
-    public void newScore(String name, int score) throws IOException {
+
+    public void newScoreboard(){
         this.scoreBoard = new Scoreboard();
+    }
+    public void newScore(String name, int score) throws IOException {
+
         this.scoreBoard.setNewScore(name, score);
+    }
+    public Scoreboard getScoreBoard(){
+        if(scoreBoard == null){
+            newScoreboard();
+        }
+        return scoreBoard;
     }
 
     public String[][] getArr() {

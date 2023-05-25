@@ -33,7 +33,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
     }
 
 
-        // Create the timer
+    // Create the timer
     public void startGameTimer() {
         count = 5;
         timer = new Timer(1000, new ActionListener() {
@@ -45,7 +45,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
                     countdownLabel.setText(String.valueOf(count));
                 } else {
                     timer.stop();
-                   // view.getController().startGame();
+                    // view.getController().startGame();
 
                     countdownLabel.setText("0");
 

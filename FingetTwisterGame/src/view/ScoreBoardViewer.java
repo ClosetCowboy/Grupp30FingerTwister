@@ -3,6 +3,8 @@ package view;//
 // (powered by FernFlower decompiler)
 //
 
+import model.Scoreboard;
+
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,15 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class ScoreBoardViewer extends JFrame implements Runnable {
-  /*  public static void main(String[]args){
-        new ScoreBoardViewer();
-    } **/
+    public static void main(String[]args){
+
+    }
     private JPanel panel;
     private JTextArea textArea;
     private int count;
+    private Scoreboard scoreboard;
+    private View view;
 
-    public ScoreBoardViewer() throws HeadlessException {
-        super("ScoreBoard");
+    public ScoreBoardViewer(View view) throws HeadlessException {
+        this.view = view;
+        // super("ScoreBoard");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panel = new JPanel();
         this.textArea = new JTextArea();
@@ -43,17 +48,21 @@ public class ScoreBoardViewer extends JFrame implements Runnable {
     }
 
     public void setTextArea() throws IOException {
-        String str = "";
-        FileReader fr = new FileReader("ScoreBoard.txt");
-        BufferedReader br = new BufferedReader(fr);
-
-        for(int i = 0; i < br.read(); ++i) {
-            str = str + br.readLine() + "\n";
-            ++this.count;
+        this.scoreboard = view.getController().getScoreBoard();
+        String name;
+        String score;
+        String textfield = " ";
+        for(int i=0; i<scoreboard.getScoreboard().size(); i++){
+            name = scoreboard.getScoreboard().get(i).getName();
+            System.out.println("ScoreboardPanel");
+            System.out.println(name);
+            score = String.valueOf(scoreboard.getScoreboard().get(i).getScore());
+            System.out.println(score);
+            // textfield = textfield + "Name: " + name + "Score: " + score + "\n";
+            textfield = textfield + String.format("%12s, %10s", name , score) + "\n";
         }
-
-        fr.close();
-        this.textArea.setText(str);
+        this.textArea.setText(textfield);
+        System.out.println("TextField" + "\n" + textfield);
     }
 
     public void run() {

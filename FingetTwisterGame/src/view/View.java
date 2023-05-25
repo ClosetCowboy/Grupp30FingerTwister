@@ -29,34 +29,34 @@ public class View extends JFrame{
         createPanels();
         addPanels();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // this.panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-       // addButtons();
+        // addButtons();
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
-/*
-    private void addButtons() {
-        String[] arr = controller.getArr();
+    /*
+        private void addButtons() {
+            String[] arr = controller.getArr();
 
-        for (int i = 0; i < arr.length; ++i) {
-            String s = arr[i];
-            JButton button = new JButton(s);
-            button.addKeyListener(this);
-            button.setOpaque(true);
-            button.setBorderPainted(false);
-            button.setForeground(Color.BLACK);
-            button.setBackground(Color.RED);
-            button.setVisible(true);
-            this.panel.add(button);
-            controller.getButtonArr().add(button);
+            for (int i = 0; i < arr.length; ++i) {
+                String s = arr[i];
+                JButton button = new JButton(s);
+                button.addKeyListener(this);
+                button.setOpaque(true);
+                button.setBorderPainted(false);
+                button.setForeground(Color.BLACK);
+                button.setBackground(Color.RED);
+                button.setVisible(true);
+                this.panel.add(button);
+                controller.getButtonArr().add(button);
+            }
         }
-    }
 
- */
+     */
     private void createPanels() {
         startingPanel = new GameModePanel(this);
         gamePanel = new GamePanel(this);
@@ -165,6 +165,9 @@ public class View extends JFrame{
     }
 
     public CountdownPanel getCountDownPanel() {
+        if(countDownPanel == null) {
+            countDownPanel = new CountdownPanel(this);
+        }
         return countDownPanel;
     }
 

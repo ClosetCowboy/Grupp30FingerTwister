@@ -15,7 +15,7 @@ import java.util.Objects;
 public class GamePanel extends JPanel implements KeyListener {
     private View view;
     //private String[] arr = new String [] {"q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a",
-                     // "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
+    // "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
 
 
     public GamePanel(View view){
@@ -66,25 +66,25 @@ public class GamePanel extends JPanel implements KeyListener {
         }
 
     }
-/*
-    private void addButtons() {
-        String[][] arr = view.getController().getArr();
+    /*
+        private void addButtons() {
+            String[][] arr = view.getController().getArr();
 
-        for (int i = 0; i < arr.length; ++i) {
-            String s = arr[i];
-            JButton button = new JButton(s);
-            button.addKeyListener(this);
-            button.setOpaque(true);
-            button.setBorderPainted(false);
-            button.setForeground(Color.BLACK);
-            button.setBackground(Color.LIGHT_GRAY);
-            button.setVisible(true);
-            this.add(button);
-            view.getController().getButtonArr().add(button);
+            for (int i = 0; i < arr.length; ++i) {
+                String s = arr[i];
+                JButton button = new JButton(s);
+                button.addKeyListener(this);
+                button.setOpaque(true);
+                button.setBorderPainted(false);
+                button.setForeground(Color.BLACK);
+                button.setBackground(Color.LIGHT_GRAY);
+                button.setVisible(true);
+                this.add(button);
+                view.getController().getButtonArr().add(button);
+            }
         }
-    }
 
- */
+     */
     public void makeLitButton(JButton lightUpButton) {
         lightUpButton.setBackground(Color.YELLOW);
         lightUpButton.setOpaque(true);
@@ -93,24 +93,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    /*
-    @Override
-    public void keyTyped(KeyEvent e) {
-       // System.out.println("You typed: "+e.getExtendedKeyCode());
-       // System.out.println(e.getSource().toString());
+        // System.out.println("You typed: "+e.getExtendedKeyCode());
+        // System.out.println(e.getSource().toString());
 
     }
     @Override
@@ -138,7 +122,7 @@ public class GamePanel extends JPanel implements KeyListener {
                     button.setVisible(true);
                     view.getController().setKeyCount(view.getController().getKeyCount() + 1);
                     view.getCountDownPanel().setCount(5);
-                  //  view.getCountDownPanel().startGameTimer();
+                    //  view.getCountDownPanel().startGameTimer();
 
 
 
@@ -148,7 +132,7 @@ public class GamePanel extends JPanel implements KeyListener {
                     button.setVisible(true);
                     view.getController().setKeyCount(view.getController().getKeyCount() + 1);
                     view.getCountDownPanel().setCount(5);
-                   // view.getCountDownPanel().startGameTimer();
+                    // view.getCountDownPanel().startGameTimer();
                 } else {
                     button.setBackground(Color.RED);
                     button.setOpaque(true);
@@ -198,5 +182,4 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
     }
-    */
 }

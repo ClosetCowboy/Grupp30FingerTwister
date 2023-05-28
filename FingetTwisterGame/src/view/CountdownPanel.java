@@ -43,9 +43,9 @@ public class CountdownPanel extends JPanel implements ActionListener  {
                 count--;
                 if (count >= 1) {
                     countdownLabel.setText(String.valueOf(count));
-                }else if(Objects.equals(countdownLabel.getText(), "0")){
-                    gm2.timeIsUpLoserEvent();
-                }
+                }//else if(Objects.equals(countdownLabel.getText(), "0")){
+                    //gm2.timeIsUpLoserEvent();
+                //}
                  else
                 {
                     timer.stop();

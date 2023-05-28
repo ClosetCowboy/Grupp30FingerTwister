@@ -55,7 +55,7 @@ public class View extends JFrame{
 
      */
     private void createPanels() {
-        startingPanel = new GameModePanel(this);
+        startingPanel = new GameModePanel(this, controller);
         gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
     }

@@ -1,5 +1,7 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -67,14 +69,16 @@ public class StartMenu {
         multiplayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent multiPlayerPressed) {
                 frame.setVisible(false);
-                new VersionPanel(true);
+                new Controller(true);
+                //new VersionPanel(true); ToDo Detta ska tillbaka senare!!!
             }
         });
 
         singlePlayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent singlePlayerPressed) {
                 frame.setVisible(false);
-                new VersionPanel(false);
+                new Controller(false);
+                //new VersionPanel(false); ToDo Detta ska tillbaka senare!!!
             }
         });
     }

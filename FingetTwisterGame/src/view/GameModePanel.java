@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import controller.GameMode2;
 
 import javax.swing.*;
@@ -15,7 +16,9 @@ public class GameModePanel extends JPanel implements ActionListener {
     private JButton startButton;
     private int count = 5;
     private Timer secTimer;
-    public GameModePanel(View view) {
+    private Controller controller;
+    public GameModePanel(View view, Controller controller) {
+        this.controller = controller;
         this.view = view;
         addStartButton();
 
@@ -58,7 +61,6 @@ public class GameModePanel extends JPanel implements ActionListener {
             startButton.setText("5");
             secTimer = new Timer(1000,this);
             secTimer.start();
-            view.getController().setGm2(new GameMode2(view));
         }
 
         if (e.getSource() instanceof Timer){
@@ -74,7 +76,7 @@ public class GameModePanel extends JPanel implements ActionListener {
                 //view.setGamePanel(new GamePanel(view));
                 //view.getController().startGame();
                 if (view.getController().isGamemode()){
-                    view.getController().setGm2(new GameMode2(view));
+                    view.getController().setGm2(new GameMode2(view, this.controller));
                 }else view.getController().startGame();
 
             }

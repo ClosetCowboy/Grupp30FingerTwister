@@ -104,12 +104,13 @@ public class GamePanel extends JPanel implements KeyListener {
 
                 controller.getGm2().setTurn(false);
                 controller.getGm2().nextTurn();
-            } else {
+            } /*else {
                 if (controller.getGm2().isTurn()) {
                     JOptionPane.showMessageDialog(null, "player1 lost");
                 } else
                     JOptionPane.showMessageDialog(null, "player2 lost");
             }
+            */
         }
     }
 
@@ -200,7 +201,7 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
             }
         }else{
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < 4; i++){
                 if (e.getKeyChar() == controller.getGm2().getRandomChars1()[i]){
                     JOptionPane.showMessageDialog(null, "Player1 lost");
                 }

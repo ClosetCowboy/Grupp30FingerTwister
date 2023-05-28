@@ -17,8 +17,8 @@ public class GameMode2 implements Runnable, KeyListener {
             'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å', '¨',
             'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä',
             'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'};
-    private char[] randomChars1 = new char[5];
-    private char[] randomChars2 = new char[5];
+    private char[] randomChars1 = new char[4];
+    private char[] randomChars2 = new char[4];
     private Random random = new Random();
     private int index = 0;
     private int count = 0;
@@ -29,7 +29,8 @@ public class GameMode2 implements Runnable, KeyListener {
     private int[] status = new int[4];
 
 
-    public GameMode2(View view) {
+    public GameMode2(View view, Controller controller) {
+        this.controller = controller;
         this.view = view;
         Thread thread = new Thread(this);
         thread.start();
@@ -39,11 +40,12 @@ public class GameMode2 implements Runnable, KeyListener {
 
 
     public void runRandomizer() {
-        //Detta kommer behövas ändras!!!!!!!!
+
         randomizeChar(randomChars1, randomChars2, 1);
         randomizeChar(randomChars2, randomChars1, 2);
+        //Detta kommer behövas ändras!!!!!!!!
+        index = (index + 1) % 4;
 
-        index = (index + 1) % 5;
     }
 
     public void randomizeChar(char[] randomChar, char[] comparisonArray, int arrayNumber) {
@@ -61,24 +63,34 @@ public class GameMode2 implements Runnable, KeyListener {
             System.out.println("From Array " + arrayNumber + ": " + Arrays.toString(randomChar));
             count++;
         } else randomizeChar(randomChar, comparisonArray, arrayNumber);
+
+        for (int i = 0 ; i < controller.getButtonArr().size() ; i++){
+            if ((controller.getButtonArr().get(i).getText().charAt(0)) == newChar){
+                if (turn){
+                    player1.add(view.getController().getButtonArr().get(i));
+                    turn = false;
+                }else{
+                    player2.add(view.getController().getButtonArr().get(i));
+                    turn = true;
+                }
+            }
+        }
     }
 
 //Här slutar den //TheodorB
     @Override
     public void run() {
-        this.startGameMode2();
-    }
-
-    private void startGameMode2() {
         runRandomizer();
+        lightUpGreen();
     }
     public void lightUpGreen() {
         if (turn) {
             for (char c : randomChars1) {
                 if (c != '\u0000') {
-                    for (JButton button : controller.getButtonArr()) {
-                        if (Objects.equals(button.getText(), String.valueOf(c))) {
-                            button.setBackground(Color.BLUE);
+                    for (int i = 0 ; i < randomChars1.length; i++ ) {
+                        if (Objects.equals(player1.get(i).getText(), String.valueOf(randomChars1[i]))) {
+                            player1.get(i).setBackground(Color.BLUE);
+                            view.getGamePanel().repaint();
                             break;
                         }
                     }
@@ -87,9 +99,10 @@ public class GameMode2 implements Runnable, KeyListener {
         } else {
             for (char c : randomChars2) {
                 if (c != '\u0000') {
-                    for (JButton button : controller.getButtonArr()) {
-                        if (Objects.equals(button.getText(), String.valueOf(c))) {
-                            button.setBackground(Color.GREEN);
+                    for (int i = 0 ; i < randomChars2.length ; i ++) {
+                        if (Objects.equals(player2.get(i).getText(), String.valueOf(randomChars2[i]))) {
+                            player2.get(i).setBackground(Color.GREEN);
+                            view.getGamePanel().repaint();
                         }
                     }
                 }
@@ -99,9 +112,8 @@ public class GameMode2 implements Runnable, KeyListener {
     public void nextTurn() {
         //Indikera vems tur det är och vilken tangent från randomCharArray1 || randomCharArray2.
         lightUpGreen();
-        if (turn){
-            runRandomizer();
-        }
+        runRandomizer();
+
     }
 
     @Override
@@ -110,21 +122,15 @@ public class GameMode2 implements Runnable, KeyListener {
 
         if (randomChars1[index] == e.getKeyChar() && turn){
             //Skickas meddelande till GUI om någon förändring
-            turn = true;
+            turn = false;
             nextTurn();
         }
 
         else if (randomChars2[index] == e.getKeyChar() && !turn){
             //Skickas meddelande till GUI om någon förändring
 
-            turn = false;
+            turn = true;
             nextTurn();
-        }
-        else{
-            if (turn){
-                JOptionPane.showMessageDialog(null,"player1 lost");
-            }else
-                JOptionPane.showMessageDialog(null,"player2 lost");
         }
 
     }

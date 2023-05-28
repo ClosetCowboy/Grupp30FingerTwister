@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 
 public class Controller implements ActionListener, Runnable {
+    //Assosiera dessa String knapparna med buttonarr och i gamemode2
     private final String[][] arr = {
             {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "´",},
             {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å", "¨", "'"},

@@ -22,7 +22,7 @@ public class View extends JFrame{
         this.controller = controller;
         this.setLayout(borderLayout);
 
-        this.setSize(1920,1080);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         createPanels();
         addPanels();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

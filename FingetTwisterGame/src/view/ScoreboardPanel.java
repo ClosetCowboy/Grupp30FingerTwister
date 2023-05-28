@@ -1,6 +1,6 @@
 package view;
 
-import model.Scoreboard;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ public class ScoreboardPanel extends JPanel implements Runnable {
     private View view;
     private JTextArea textArea;
     private int count;
-    Scoreboard scoreboard;
+    private Scoreboard scoreboard;
 
     public ScoreboardPanel(View view) throws HeadlessException {
         this.view = view;
@@ -48,7 +48,7 @@ public class ScoreboardPanel extends JPanel implements Runnable {
 
     public void setTextArea() throws IOException {
 
-        this.scoreboard = view.getController().getScoreBoard();
+        scoreboard = view.getController().getScoreBoard();
         String name;
         String score;
         String textfield = " ";

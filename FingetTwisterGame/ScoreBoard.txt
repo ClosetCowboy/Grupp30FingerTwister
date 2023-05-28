@@ -14,6 +14,8 @@
 12
  Theodor
 9
+ Jannmes
+9
  Eva
 7
  Gurkan
@@ -21,6 +23,8 @@
  Adam
 3
  Guggis
+2
+ null
 2
  Hannes
 1

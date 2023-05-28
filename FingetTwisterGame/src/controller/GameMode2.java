@@ -39,11 +39,13 @@ public class GameMode2 implements Runnable, KeyListener {
 
 
     public void runRandomizer() {
-        //Detta kommer behövas ändras!!!!!!!!
-        randomizeChar(randomChars1, randomChars2, 1);
-        randomizeChar(randomChars2, randomChars1, 2);
 
-        index = (index + 1) % 5;
+        while( count < 120300 ) {     //Detta kommer behövas ändras!!!!!!!!
+            randomizeChar(randomChars1, randomChars2, 1);
+            randomizeChar(randomChars2, randomChars1, 2);
+
+            index = (index + 1) % 5;
+        }
     }
 
     public void randomizeChar(char[] randomChar, char[] comparisonArray, int arrayNumber) {
@@ -61,7 +63,7 @@ public class GameMode2 implements Runnable, KeyListener {
             randomChar[index] = newChar;
             System.out.println("From Array " + arrayNumber + ": " + Arrays.toString(randomChar));
             count++;
-        } else randomizeChar(randomChar, comparisonArray, arrayNumber);
+        } //else randomizeChar(randomChar, comparisonArray, arrayNumber);
     }
 
 //Här slutar den //TheodorB

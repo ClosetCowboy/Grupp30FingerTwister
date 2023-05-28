@@ -58,7 +58,7 @@ public class GameModePanel extends JPanel implements ActionListener {
             startButton.setText("5");
             secTimer = new Timer(1000,this);
             secTimer.start();
-            new GameMode2(view);
+            view.getController().setGm2(new GameMode2(view));
         }
 
         if (e.getSource() instanceof Timer){
@@ -74,7 +74,7 @@ public class GameModePanel extends JPanel implements ActionListener {
                 //view.setGamePanel(new GamePanel(view));
                 //view.getController().startGame();
                 if (view.getController().isGamemode()){
-                    new GameMode2(view);
+                    view.getController().setGm2(new GameMode2(view));
                 }else view.getController().startGame();
 
             }

@@ -137,9 +137,6 @@ public class Controller implements ActionListener, Runnable {
         }
 
     }
-    public void runGm2(){
-        new GameMode2(view);
-    }
     public void run() {
         this.startGame();
     }
@@ -174,7 +171,7 @@ public class Controller implements ActionListener, Runnable {
     }
 
     public GameMode2 getGm2() {
-        return gm2;
+        return this.gm2;
     }
 
     public void setGm2(GameMode2 gm2) {

@@ -39,7 +39,7 @@ public class Controller implements ActionListener, Runnable {
 
     private int keyCount;
     private GameMode2 gm2;
-    private boolean gamemode;//If this is true, gamemode is TypeRace, if false, gamemode is fingertwister/Multiplayer
+    private boolean gamemode;//If this is true, gamemode is fingertwister/Multiplayer, if false, gamemode is singleplayer
 
     public Controller(boolean gamemode) {
         this.gamemode = gamemode;
@@ -106,11 +106,11 @@ public class Controller implements ActionListener, Runnable {
     }
 
     public void newScoreboard(){
-        this.scoreBoard = new Scoreboard();
+        scoreBoard = new Scoreboard();
     }
     public void newScore(String name, int score) throws IOException {
 
-        this.scoreBoard.setNewScore(name, score);
+        scoreBoard.setNewScore(name, score);
     }
     public Scoreboard getScoreBoard(){
         if(scoreBoard == null){

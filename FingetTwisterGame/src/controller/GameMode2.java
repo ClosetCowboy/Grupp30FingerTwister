@@ -31,6 +31,8 @@ public class GameMode2 implements Runnable, KeyListener {
 
     public GameMode2(View view) {
         this.view = view;
+        Thread thread = new Thread(this);
+        thread.start();
     }
 
     // Detta ÄR algoritmen som fixar att det blir random tecken
@@ -69,7 +71,6 @@ public class GameMode2 implements Runnable, KeyListener {
 
     private void startGameMode2() {
         runRandomizer();
-
     }
     public void lightUpGreen() {
         if (turn) {
@@ -88,7 +89,7 @@ public class GameMode2 implements Runnable, KeyListener {
                 if (c != '\u0000') {
                     for (JButton button : controller.getButtonArr()) {
                         if (Objects.equals(button.getText(), String.valueOf(c))) {
-                            button.setBackground(Color.RED);
+                            button.setBackground(Color.GREEN);
                         }
                     }
                 }

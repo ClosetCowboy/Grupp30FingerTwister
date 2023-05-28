@@ -1,24 +1,26 @@
 package view;
 
+import controller.GameMode2;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class GameModePanel extends JPanel implements ActionListener {
     private View view;
     private JComboBox<String> gameModeChoser;
-    private String [] choices = new String[]{"FingerTwister", "TypingRace"};
+    //private String [] choices = new String[]{"FingerTwister", "TypingRace"};
     private JButton startButton;
     private int count = 5;
     private Timer secTimer;
     public GameModePanel(View view) {
         this.view = view;
-        addGameModeChoser();
         addStartButton();
 
     }
-
+/*
     private void addGameModeChoser() {
         gameModeChoser = new JComboBox<>(choices);
         gameModeChoser.addActionListener(this);
@@ -32,6 +34,8 @@ public class GameModePanel extends JPanel implements ActionListener {
         this.add(gameModeChoser);
     }
 
+ */
+
     private void addStartButton() {
         startButton = new JButton("Start");
         startButton.setFont(new Font("Font.ITALIC",Font.ITALIC,54));
@@ -43,10 +47,20 @@ public class GameModePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton){
+            if (Objects.equals(startButton.getText(), "STOP")){
+                this.setVisible(false);
+                new StartMenu();
+            }
+        }
+
+        if (e.getSource() == startButton){
+
             startButton.setText("5");
             secTimer = new Timer(1000,this);
             secTimer.start();
+            new GameMode2(view);
         }
+
         if (e.getSource() instanceof Timer){
             count--;
             startButton.setText(String.valueOf(count));
@@ -58,11 +72,15 @@ public class GameModePanel extends JPanel implements ActionListener {
                 view.getGamePanel().transferFocus();
                 //view.getGamePanel().createKeyboard();
                 //view.setGamePanel(new GamePanel(view));
-                view.getController().startGame();
+                //view.getController().startGame();
+                if (view.getController().isGamemode()){
+                    new GameMode2(view);
+                }else view.getController().startGame();
 
             }
         }
 
+/*
         if (e.getSource() == getGameModeChoser()){
             for ( int i = 0; i < choices.length;i++ ){
                 if (e.getSource() == "FingerTwister"){
@@ -73,6 +91,8 @@ public class GameModePanel extends JPanel implements ActionListener {
                 }
             }
         }
+
+ */
     }
 
     public JComboBox<String> getGameModeChoser() {

@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements KeyListener {
                 JButton button = new JButton(view.getController().getArr()[row][col]);
                 button.addKeyListener(this);
                 button.setBorderPainted(true);
-                button.setPreferredSize(new Dimension(65, 50)); // set the preferred size to 50x50
+                button.setPreferredSize(new Dimension(100 , 80)); // set the preferred size to 50x50
                 pRow.add(button);
                 view.getController().getButtonArr().add(button);
             }
@@ -164,7 +164,7 @@ public class GamePanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         System.out.println("You released "+e.getKeyChar());
 
-        if (controller.isGamemode()) {
+        if (!controller.isGamemode()) {
 
 
             for (JButton button : view.getController().getButtonArr()) {
@@ -192,6 +192,8 @@ public class GamePanel extends JPanel implements KeyListener {
                         }
                         // TODO: Skicka tillbaka till en startskärm.
                         //   view.getController().startCountDown();
+                        new StartMenu();
+                        this.setVisible(false);
                     }
 
                     break;

@@ -5,7 +5,6 @@ import view.StartMenu;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        //Controller controller = new Controller();
         new StartMenu();
     }
 }

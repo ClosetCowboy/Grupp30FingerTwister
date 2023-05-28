@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartMenu {
+    private View view;
     public StartMenu() {
-
         JFrame frame = new JFrame();
         frame.setLayout(null);
 
@@ -67,14 +67,14 @@ public class StartMenu {
         multiplayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent multiPlayerPressed) {
                 frame.setVisible(false);
-                new VersionPanel();
+                new VersionPanel(true);
             }
         });
 
         singlePlayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent singlePlayerPressed) {
                 frame.setVisible(false);
-                new VersionPanel();
+                new VersionPanel(false);
             }
         });
     }

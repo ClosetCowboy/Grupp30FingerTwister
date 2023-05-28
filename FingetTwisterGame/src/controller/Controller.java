@@ -23,11 +23,10 @@ import javax.swing.Timer;
 
 public class Controller implements ActionListener, Runnable {
     private final String[][] arr = {
-            {"\u001B", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "´", "\u232B"},
-            {"\u21E5", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å", "¨", "'"},
-            {"\u21EA", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", "Ä", "\u23CE"},
-            {"\u21E7", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "-", "\u21E7", "\u2191"},
-            {"fn", "\u2190", "\u2193", "\u2192"}};
+            {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "´",},
+            {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å", "¨", "'"},
+            {"A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", "Ä"},
+            {"Z", "X", "C", "V", "B", "N", "M", ",", ".", "-"}};
     private View view ;
     private ArrayList<JButton> buttonArr = new ArrayList<>();
     private JButton litButton1;
@@ -40,8 +39,10 @@ public class Controller implements ActionListener, Runnable {
 
     private int keyCount;
     private GameMode2 gm2;
+    private boolean gamemode;//If this is true, gamemode is TypeRace, if false, gamemode is fingertwister/Multiplayer
 
-    public Controller() {
+    public Controller(boolean gamemode) {
+        this.gamemode = gamemode;
         this.view = new View(this);
     }
 
@@ -178,5 +179,13 @@ public class Controller implements ActionListener, Runnable {
 
     public void setGm2(GameMode2 gm2) {
         this.gm2 = gm2;
+    }
+
+    public boolean isGamemode() {
+        return gamemode;
+    }
+
+    public void setGamemode(boolean gamemode) {
+        this.gamemode = gamemode;
     }
 }

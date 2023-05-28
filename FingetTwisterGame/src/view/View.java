@@ -4,7 +4,6 @@ package view;//
 //
 
 import controller.*;
-
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,8 +12,6 @@ public class View extends JFrame{
     private JPanel panel;
 
     private GamePanel gamePanel;
-    private gamePanelManager gamePanelManager;
-
     private CountdownPanel countDownPanel;
     private JPanel scoreBoardPanel;
     private GameModePanel startingPanel;
@@ -25,7 +22,7 @@ public class View extends JFrame{
         this.controller = controller;
         this.setLayout(borderLayout);
 
-        this.setSize(getMaximumSize());
+        this.setSize(1920,1080);
         createPanels();
         addPanels();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -59,7 +56,7 @@ public class View extends JFrame{
      */
     private void createPanels() {
         startingPanel = new GameModePanel(this);
-        gamePanel = new GamePanel(this);
+        gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
     }
 
@@ -166,7 +163,7 @@ public class View extends JFrame{
 
     public CountdownPanel getCountDownPanel() {
         if(countDownPanel == null) {
-            countDownPanel = new CountdownPanel(this);
+            countDownPanel = new CountdownPanel(this, controller.getGm2());
         }
         return countDownPanel;
     }
@@ -181,14 +178,6 @@ public class View extends JFrame{
 
     public void setScoreBoardPanel(JPanel scoreBoardPanel) {
         this.scoreBoardPanel = scoreBoardPanel;
-    }
-
-    public JPanel getStartingPanel() {
-        return startingPanel;
-    }
-
-    public void setStartingPanel(GameModePanel startingPanel) {
-        this.startingPanel = startingPanel;
     }
 
     public Controller getController() {

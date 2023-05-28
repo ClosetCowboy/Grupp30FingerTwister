@@ -95,7 +95,7 @@ public class GameMode2 implements Runnable, KeyListener {
             }
         }
     }
-    private void nextTurn() {
+    public void nextTurn() {
         //Indikera vems tur det är och vilken tangent från randomCharArray1 || randomCharArray2.
         lightUpGreen();
         if (turn){
@@ -109,7 +109,6 @@ public class GameMode2 implements Runnable, KeyListener {
 
         if (randomChars1[index] == e.getKeyChar() && turn){
             //Skickas meddelande till GUI om någon förändring
-
             turn = true;
             nextTurn();
         }
@@ -136,13 +135,95 @@ public class GameMode2 implements Runnable, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        for (int i = 0; i < 5; i++){
-            if (e.getKeyChar() == randomChars1[i]){
-                JOptionPane.showMessageDialog(null, "Player1 lost");
-            }
-            if (e.getKeyChar() == randomChars2[i]){
-                JOptionPane.showMessageDialog(null, "Player2 lost");
-            }
+
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public char[] getKeyboardChars() {
+        return keyboardChars;
+    }
+
+    public void setKeyboardChars(char[] keyboardChars) {
+        this.keyboardChars = keyboardChars;
+    }
+
+    public char[] getRandomChars1() {
+        return randomChars1;
+    }
+
+    public void setRandomChars1(char[] randomChars1) {
+        this.randomChars1 = randomChars1;
+    }
+
+    public char[] getRandomChars2() {
+        return randomChars2;
+    }
+
+    public void setRandomChars2(char[] randomChars2) {
+        this.randomChars2 = randomChars2;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isTurn() {
+        return turn;
+    }
+
+    public void setTurn(boolean turn) {
+        this.turn = turn;
+    }
+
+    public int[] getStatus() {
+        return status;
+    }
+
+    public void setStatus(int[] status) {
+        this.status = status;
+    }
+
+    public void timeIsUpLoserEvent(){
+        if (turn){
+            JOptionPane.showMessageDialog(null,"Player 1 lost, Player 2 Wins");
+        }
+        if (!turn){
+            JOptionPane.showMessageDialog(null,"Player 2 lost, Player 1 Wins");
         }
     }
 

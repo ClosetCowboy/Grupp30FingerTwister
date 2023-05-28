@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 public class VersionPanel extends JFrame implements ActionListener {
     private JButton rgbButton;
     private JButton defaultButton;
+    private boolean gameMode;
 
-    public VersionPanel() {
+    public VersionPanel(boolean gameMode) {
+        this.gameMode = gameMode;
         setTitle("Home Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,11 +43,11 @@ public class VersionPanel extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == rgbButton)   {
-            new Controller();
+            new Controller(gameMode);
             this.setVisible(false);
         }
         if (e.getSource() == defaultButton){
-            new Controller();
+            new Controller(gameMode);
             this.setVisible(false);
         }
     }

@@ -50,6 +50,7 @@ public class GameMode2 implements Runnable, KeyListener {
         char newChar = keyboardChars[random.nextInt(keyboardChars.length)];
         boolean charExists = false;
         for (int i = 0; i < randomChar.length; i++) {
+
             if (newChar == randomChar[i] || newChar == comparisonArray[i]) {
                 charExists = true;
                 break;

@@ -22,6 +22,13 @@ public class View extends JFrame{
         this.controller = controller;
         this.setLayout(borderLayout);
 
+        this.setUndecorated(true);
+        /* Potentiellt bättre utseende för GUIT
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         createPanels();
         addPanels();

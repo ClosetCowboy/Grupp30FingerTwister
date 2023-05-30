@@ -12,6 +12,8 @@
 12
  null
 12
+ Hannnes
+12
  Theodor
 9
  Jannmes
@@ -29,6 +31,4 @@
  Hannes
 1
  Hannes
-0
- null
 0

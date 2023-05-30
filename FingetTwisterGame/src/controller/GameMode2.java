@@ -66,6 +66,7 @@ public class GameMode2 implements Runnable, KeyListener {
         } else randomizeChar(randomChar, comparisonArray, arrayNumber);
 
         for (int i = 0 ; i < controller.getButtonArr().size() ; i++){
+
             if ((controller.getButtonArr().get(i).getText().charAt(0)) == newChar){
                 if (turn){
                     player1.add(view.getController().getButtonArr().get(i));
@@ -81,10 +82,12 @@ public class GameMode2 implements Runnable, KeyListener {
 //Här slutar den //TheodorB
     @Override
     public void run() {
-        runRandomizer();
-        lightUpGreen();
+        while(running){
+            runRandomizer();
+            lightUpKeys();
+        }
     }
-    public void lightUpGreen() {
+    public void lightUpKeys() {
         if (turn) {
             for (char c : randomChars1) {
                 if (c != '\u0000') {
@@ -112,7 +115,7 @@ public class GameMode2 implements Runnable, KeyListener {
     }
     public void nextTurn() {
         //Indikera vems tur det är och vilken tangent från randomCharArray1 || randomCharArray2.
-        lightUpGreen();
+        lightUpKeys();
         runRandomizer();
 
     }

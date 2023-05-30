@@ -17,11 +17,27 @@ public class GameModePanel extends JPanel implements ActionListener {
     private int count = 5;
     private Timer secTimer;
     private Controller controller;
+    private JLabel scoreboardText;
+    private JLabel spaceInBetween;
     public GameModePanel(View view, Controller controller) {
         this.controller = controller;
         this.view = view;
-        addStartButton();
+        addAllLabels();
+    }
 
+    private void addAllLabels() {
+        addScoreboardText();
+        addSpaceInbetween();
+        addStartButton();
+        addSpaceInbetween();
+        addSpaceInbetween();
+    }
+
+
+    private void addSpaceInbetween() {
+        spaceInBetween = new JLabel();
+        spaceInBetween.setPreferredSize(new Dimension(400,100));
+        this.add(spaceInBetween);
     }
 /*
     private void addGameModeChoser() {
@@ -45,6 +61,12 @@ public class GameModePanel extends JPanel implements ActionListener {
         startButton.addActionListener(this);
         startButton.setPreferredSize(new Dimension(300,100));
         this.add(startButton);
+    }
+    private void addScoreboardText(){
+        scoreboardText = new JLabel("Scoreboard");
+        scoreboardText.setFont(new Font("Font.ITALIC",Font.ITALIC,54));
+        scoreboardText.setPreferredSize(new Dimension(300,100));
+        this.add(scoreboardText);
     }
 
     @Override

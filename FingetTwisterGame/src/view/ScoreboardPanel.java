@@ -10,27 +10,22 @@ import java.util.ArrayList;
 public class ScoreboardPanel extends JPanel implements Runnable {
     private View view;
     private JTextArea textArea;
-    private int count;
     private Scoreboard scoreboard;
+    private JLabel spaceBeforeScoreboard;
 
     public ScoreboardPanel(View view) throws HeadlessException {
         this.view = view;
         this.textArea = new JTextArea();
 
-        JLabel scoreBoardText = new JLabel("Scoreboard");
-        Font font = new Font("BOLD", Font.BOLD, 20);
-        scoreBoardText.setFont(font);
-        scoreBoardText.setBackground(null);
-        this.add(scoreBoardText, BorderLayout.NORTH);
-
         textArea.setPreferredSize(new Dimension(400,1100));
-        Font bigFont = new Font("Italic", Font.ITALIC, 12);
+        Font bigFont = new Font("BOLD", Font.BOLD, 30);
         textArea.setFont(bigFont);
         textArea.setBackground(null);
 
         this.textArea.setEditable(false);
         this.add(this.textArea);
         scoreboard = new Scoreboard();
+        addSpaceInBetween();
 
         try {
             this.setTextArea();
@@ -44,6 +39,11 @@ public class ScoreboardPanel extends JPanel implements Runnable {
         thread.start();
     }
 
+    private void addSpaceInBetween() {
+        spaceBeforeScoreboard = new JLabel();
+        spaceBeforeScoreboard.setPreferredSize(new Dimension(50,100));
+        this.add(spaceBeforeScoreboard);
+    }
 
 
     public void setTextArea() throws IOException {

@@ -21,8 +21,6 @@ public class View extends JFrame{
     public View(Controller controller) {
         this.controller = controller;
         this.setLayout(borderLayout);
-
-        this.setUndecorated(true);
         /* Potentiellt bättre utseende för GUIT
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -76,7 +76,7 @@ public class TwisterPanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         System.out.println("You pressed "+e.getKeyChar());
 
-        for (JButton b: view.getController().getGm2().getPlayer1()) {
+        for (JButton b: view.getController().getGm2().getPlayer1ButtonArray()) {
             if (e.getSource() instanceof JButton) {
                 if (String.valueOf(e.getKeyChar()).equals(b.getText())) {
                     view.getController().getGm2().setRunning(false);

@@ -93,23 +93,21 @@ public class GamePanel extends JPanel implements KeyListener {
         // System.out.println("You typed: "+e.getExtendedKeyCode());
         // System.out.println(e.getSource().toString());
         if (controller.isGamemode()) {
-
-            if (controller.getGm2().getRandomChars1()[controller.getGm2().getIndex()] == e.getKeyChar() && controller.getGm2().isTurn()) {
-                //Skickas meddelande till GUI om någon förändring
-                controller.getGm2().setTurn(false);
-                controller.getGm2().nextTurn();
-            } else if (controller.getGm2().getRandomChars2()[controller.getGm2().getIndex()] == e.getKeyChar() && !controller.getGm2().isTurn()) {
-                //Skickas meddelande till GUI om någon förändring
-
-                controller.getGm2().setTurn(true);
-                controller.getGm2().nextTurn();
-            } /*else {
-                if (controller.getGm2().isTurn()) {
-                    JOptionPane.showMessageDialog(null, "player1 lost");
-                } else
-                    JOptionPane.showMessageDialog(null, "player2 lost");
+            for (int i = 0; i < controller.getGm2().getRandomChars1().length; i++) {
+                if ((String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(controller.getGm2().getRandomChars1()[i]))) && controller.getGm2().isTurn()) {
+                    //Skickas meddelande till GUI om någon förändring
+                    controller.getGm2().setTurn(false);
+//                controller.getGm2().nextTurn();
+                }
             }
-            */
+            for (int i = 0; i < controller.getGm2().getRandomChars2().length; i++) {
+                if ((String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(controller.getGm2().getRandomChars2()[i]))) && !controller.getGm2().isTurn()) {
+                    //Skickas meddelande till GUI om någon förändring
+                    controller.getGm2().setTurn(true);
+                    controller.getGm2().runRandomizer();
+//                controller.getGm2().nextTurn();
+                }
+            }
         }
     }
 
@@ -156,9 +154,27 @@ public class GamePanel extends JPanel implements KeyListener {
                     break;
                 }
             }
+        }/*
+        if (controller.isGamemode()) {
+            if ((controller.getGm2().getRandomChars1()[controller.getGm2().getIndex()] == e.getKeyChar()) && controller.getGm2().isTurn()) {
+                //Skickas meddelande till GUI om någon förändring
+                controller.getGm2().setTurn(false);
+                controller.getGm2().runRandomizer();
+    //                controller.getGm2().nextTurn();
+            } else if ((controller.getGm2().getRandomChars2()[controller.getGm2().getIndex()] == e.getKeyChar()) && !controller.getGm2().isTurn()) {
+                //Skickas meddelande till GUI om någon förändring
+                controller.getGm2().setTurn(true);
+                controller.getGm2().runRandomizer();
+    //                controller.getGm2().nextTurn();
+            } /*else {
+                if (controller.getGm2().isTurn()) {
+                    JOptionPane.showMessageDialog(null, "player1 lost");
+                } else
+                    JOptionPane.showMessageDialog(null, "player2 lost");
+            }
+            */
         }
 
-    }
 
     @Override
     public void keyReleased(KeyEvent e) {

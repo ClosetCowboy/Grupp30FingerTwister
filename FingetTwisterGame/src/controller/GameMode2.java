@@ -9,36 +9,34 @@ import java.awt.event.KeyListener;
 import java.util.*;
 import java.util.List;
 
-public class GameMode2 implements Runnable, KeyListener {
+public class GameMode2 implements Runnable {
 
     private Controller controller;
     private View view;
     private char[] keyboardChars = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '´',
-            'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å', '¨',
-            'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä',
-            'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'};
+                                    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å', '¨',
+                                    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä',
+                                    'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'};
     private char[] randomChars1 = new char[4];
     private char[] randomChars2 = new char[4];
     private Random random = new Random();
+    private int rounds;
     private int index = 0;
     private int count = 0;
     private boolean running = true;
-    private List<JButton> player1 = new ArrayList<>();
-    private List<JButton> player2 = new ArrayList<>();
+    private List<JButton> player1ButtonArray = new ArrayList<>();
+    private List<JButton> player2ButtonArray = new ArrayList<>();
     private boolean turn = true; // Player 1 = true && player 2 = false
     private int[] status = new int[4];
-
-
+    private Thread fingerTwisterThread;
     public GameMode2(View view, Controller controller) {
         this.controller = controller;
         this.view = view;
-        Thread thread = new Thread(this);
-        thread.start();
+        fingerTwisterThread = new Thread(this);
+        fingerTwisterThread.start();
     }
 
-    // Detta ÄR algoritmen som fixar att det blir random tecken
-
-
+    // Detta är algoritmen som fixar att det blir random tecken
     public void runRandomizer() {
 
         randomizeChar(randomChars1, randomChars2, 1);
@@ -61,92 +59,57 @@ public class GameMode2 implements Runnable, KeyListener {
 
         if (!charExists) {
             randomChar[index] = newChar;
-            System.out.println("From Array " + arrayNumber + ": " + Arrays.toString(randomChar));
+            System.out.println("Array " + arrayNumber + ": " + Arrays.toString(randomChar));
             count++;
         } else randomizeChar(randomChar, comparisonArray, arrayNumber);
 
         for (int i = 0 ; i < controller.getButtonArr().size() ; i++){
 
             if ((controller.getButtonArr().get(i).getText().charAt(0)) == newChar){
-                if (turn){
-                    player1.add(view.getController().getButtonArr().get(i));
-                    turn = false;
-                }else{
-                    player2.add(view.getController().getButtonArr().get(i));
-                    turn = true;
-                }
+                if (arrayNumber == 1){
+                    player1ButtonArray.add(index, view.getController().getButtonArr().get(i));
+                } else player2ButtonArray.add(index, view.getController().getButtonArr().get(i));
             }
         }
     }
-
 //Här slutar den //TheodorB
     @Override
     public void run() {
+        runRandomizer();
         while(running){
-            runRandomizer();
             lightUpKeys();
         }
     }
-    public void lightUpKeys() {
-        if (turn) {
-            for (char c : randomChars1) {
-                if (c != '\u0000') {
-                    for (int i = 0 ; i < randomChars1.length; i++ ) {
-                        if (Objects.equals(player1.get(i).getText(), String.valueOf(randomChars1[i]))) {
-                            player1.get(i).setBackground(Color.BLUE);
-                            view.getGamePanel().repaint();
-                            break;
-                        }
-                    }
-                }
-            }
-        } else {
-            for (char c : randomChars2) {
-                if (c != '\u0000') {
-                    for (int i = 0 ; i < randomChars2.length ; i ++) {
-                        if (Objects.equals(player2.get(i).getText(), String.valueOf(randomChars2[i]))) {
-                            player2.get(i).setBackground(Color.GREEN);
+
+    public synchronized void lightUpKeys() {
+        for (char c : randomChars1) {
+            if (c != '\u0000') {
+                try {
+                    for (JButton button : player1ButtonArray) {
+                        if (Objects.equals(button.getText(), String.valueOf(c))) {
+                            button.setBackground(Color.BLUE);
                             view.getGamePanel().repaint();
                         }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         }
-    }
-    public void nextTurn() {
-        //Indikera vems tur det är och vilken tangent från randomCharArray1 || randomCharArray2.
-        lightUpKeys();
-        runRandomizer();
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println(e.getKeyChar());
-
-        if (randomChars1[index] == e.getKeyChar() && turn){
-            //Skickas meddelande till GUI om någon förändring
-            turn = false;
-            nextTurn();
+        for (char c : randomChars2) {
+            if (c != '\u0000') {
+                try{
+                    for (JButton button : player2ButtonArray) {
+                        if (Objects.equals(button.getText(), String.valueOf(c))) {
+                            button.setBackground(Color.GREEN);
+                            view.getGamePanel().repaint();
+                        }
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
         }
-
-        else if (randomChars2[index] == e.getKeyChar() && !turn){
-            //Skickas meddelande till GUI om någon förändring
-
-            turn = true;
-            nextTurn();
-        }
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 
     public Controller getController() {
@@ -247,20 +210,28 @@ public class GameMode2 implements Runnable, KeyListener {
         this.running = running;
     }
 
-    public List<JButton> getPlayer1() {
-        return player1;
+    public List<JButton> getPlayer1ButtonArray() {
+        return player1ButtonArray;
     }
 
-    public void setPlayer1(List<JButton> player1) {
-        this.player1 = player1;
+    public void setPlayer1ButtonArray(List<JButton> player1ButtonArray) {
+        this.player1ButtonArray = player1ButtonArray;
     }
 
-    public List<JButton> getPlayer2() {
-        return player2;
+    public List<JButton> getPlayer2ButtonArray() {
+        return player2ButtonArray;
     }
 
-    public void setPlayer2(List<JButton> player2) {
-        this.player2 = player2;
+    public void setPlayer2ButtonArray(List<JButton> player2ButtonArray) {
+        this.player2ButtonArray = player2ButtonArray;
+    }
+
+    public int getRounds() {
+        return rounds;
+    }
+
+    public void setRounds(int rounds) {
+        this.rounds = rounds;
     }
 }
 

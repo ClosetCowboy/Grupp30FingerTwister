@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.annotation.ElementType;
 import java.util.*;
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class GameMode2 implements Runnable {
 
     }
 
+
+
     public void randomizeChar(char[] randomChar, char[] comparisonArray, int arrayNumber) {
         char newChar = keyboardChars[random.nextInt(keyboardChars.length)];
         boolean charExists = false;
@@ -67,8 +70,14 @@ public class GameMode2 implements Runnable {
 
             if ((controller.getButtonArr().get(i).getText().charAt(0)) == newChar){
                 if (arrayNumber == 1){
-                    player1ButtonArray.add(index, view.getController().getButtonArr().get(i));
-                } else player2ButtonArray.add(index, view.getController().getButtonArr().get(i));
+                    synchronized (player1ButtonArray){
+                        player1ButtonArray.add(index, view.getController().getButtonArr().get(i));
+                    }
+                } else {
+                    synchronized (player2ButtonArray){
+                        player2ButtonArray.add(index, view.getController().getButtonArr().get(i));
+                    }
+                }
             }
         }
     }
@@ -82,34 +91,50 @@ public class GameMode2 implements Runnable {
     }
 
     public synchronized void lightUpKeys() {
-        for (char c : randomChars1) {
-            if (c != '\u0000') {
-                try {
-                    for (JButton button : player1ButtonArray) {
-                        if (Objects.equals(button.getText(), String.valueOf(c))) {
-                            button.setBackground(Color.BLUE);
-                            view.getGamePanel().repaint();
-                        }
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
+        if (turn){
+            view.getStartingPanel().getPlayer1Text().setForeground(Color.BLUE);
+            view.getStartingPanel().getPlayer2Text().setForeground(null);
+        }
+        else {
+            view.getStartingPanel().getPlayer2Text().setForeground(Color.GREEN);
+            view.getStartingPanel().getPlayer1Text().setForeground(null);
+        }
+
+        synchronized (player1ButtonArray) {
+            try {
+                for (JButton button : player1ButtonArray) {
+                    char c = button.getText().charAt(0);
+                    if (containsChar(randomChars1, c)) {
+                        button.setBackground(Color.BLUE);
+                    } else button.setBackground(null);
                 }
+                view.getGamePanel().repaint();
+            }catch(Exception e){
+                e.printStackTrace();
             }
         }
-        for (char c : randomChars2) {
-            if (c != '\u0000') {
-                try{
-                    for (JButton button : player2ButtonArray) {
-                        if (Objects.equals(button.getText(), String.valueOf(c))) {
-                            button.setBackground(Color.GREEN);
-                            view.getGamePanel().repaint();
-                        }
-                    }
-                }catch(Exception e){
-                    e.printStackTrace();
+
+        synchronized (player2ButtonArray) {
+            try {
+                for (JButton button : player2ButtonArray) {
+                    char c = button.getText().charAt(0);
+                    if (containsChar(randomChars2, c)) {
+                        button.setBackground(Color.GREEN);
+                    } else button.setBackground(null);
                 }
+                view.getGamePanel().repaint();
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
+    }
+    private boolean containsChar(char[] array, char c) {
+        for (char ch : array) {
+            if (ch == c) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Controller getController() {

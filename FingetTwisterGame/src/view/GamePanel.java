@@ -54,7 +54,8 @@ public class GamePanel extends JPanel implements KeyListener {
                 JButton button = new JButton(view.getController().getArr()[row][col]);
                 button.addKeyListener(this);
                 button.setBorderPainted(true);
-                button.setPreferredSize(new Dimension(100 , 80)); // set the preferred size to 50x50
+                button.setPreferredSize(new Dimension(120 , 90)); // set the preferred size to 50x50
+                button.setFont(new Font("Italic",Font.BOLD,34));
                 pRow.add(button);
                 view.getController().getButtonArr().add(button);
             }
@@ -217,11 +218,13 @@ public class GamePanel extends JPanel implements KeyListener {
         }
 
         else{
-            for (int i = 0; i < 4; i++){
-                if (e.getKeyChar() == controller.getGm2().getRandomChars1()[i]){
+            for (JButton button: controller.getGm2().getPlayer1ButtonArray()) {
+                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(button.getText())) {
                     JOptionPane.showMessageDialog(null, "Player1 lost");
                 }
-                else if (e.getKeyChar() == controller.getGm2().getRandomChars2()[i]){
+            }
+            for (JButton button: controller.getGm2().getPlayer2ButtonArray()) {
+                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(button.getText())){
                     JOptionPane.showMessageDialog(null, "Player2 lost");
                 }
             }

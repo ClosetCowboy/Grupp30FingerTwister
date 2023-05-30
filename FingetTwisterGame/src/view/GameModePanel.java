@@ -19,6 +19,8 @@ public class GameModePanel extends JPanel implements ActionListener {
     private Controller controller;
     private JLabel scoreboardText;
     private JLabel spaceInBetween;
+    private JLabel player1Text;
+    private JLabel player2Text;
     public GameModePanel(View view, Controller controller) {
         this.controller = controller;
         this.view = view;
@@ -26,18 +28,33 @@ public class GameModePanel extends JPanel implements ActionListener {
     }
 
     private void addAllLabels() {
-        addScoreboardText();
+        addSpaceInbetween();
+        addPlayer1Text();
         addSpaceInbetween();
         addStartButton();
         addSpaceInbetween();
+        addPlayer2Text();
         addSpaceInbetween();
     }
 
 
     private void addSpaceInbetween() {
         spaceInBetween = new JLabel();
-        spaceInBetween.setPreferredSize(new Dimension(400,100));
+        spaceInBetween.setPreferredSize(new Dimension(150,100));
         this.add(spaceInBetween);
+    }
+
+    private void addPlayer2Text() {
+        player2Text = new JLabel("Player 2");
+        player2Text.setPreferredSize(new Dimension(250,100));
+        player2Text.setFont(new Font("Italc", Font.BOLD,60));
+        this.add(player2Text);
+    }
+    private void addPlayer1Text() {
+        player1Text = new JLabel("Player 1");
+        player1Text.setPreferredSize(new Dimension(250,100));
+        player1Text.setFont(new Font("Italc", Font.BOLD,60));
+        this.add(player1Text);
     }
 /*
     private void addGameModeChoser() {
@@ -71,19 +88,18 @@ public class GameModePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == startButton){
             if (Objects.equals(startButton.getText(), "STOP")){
-                this.setVisible(false);
+                view.setVisible(false);
                 new StartMenu();
+            }else {
+                startButton.setText("5");
+                secTimer = new Timer(1000, this);
+                secTimer.start();
             }
         }
 
-        if (e.getSource() == startButton){
-
-            startButton.setText("5");
-            secTimer = new Timer(1000,this);
-            secTimer.start();
-        }
 
         if (e.getSource() instanceof Timer){
             count--;
@@ -125,5 +141,13 @@ public class GameModePanel extends JPanel implements ActionListener {
 
     public void setGameModeChoser(JComboBox<String> gameModeChoser) {
         this.gameModeChoser = gameModeChoser;
+    }
+
+    public JLabel getPlayer1Text() {
+        return player1Text;
+    }
+
+    public JLabel getPlayer2Text() {
+        return player2Text;
     }
 }

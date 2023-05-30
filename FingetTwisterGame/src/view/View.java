@@ -10,6 +10,7 @@ import javax.swing.border.Border;
 
 public class View extends JFrame{
     private JPanel panel;
+    private JLabel space;
 
     private GamePanel gamePanel;
     private CountdownPanel countDownPanel;
@@ -63,12 +64,15 @@ public class View extends JFrame{
         startingPanel = new GameModePanel(this, controller);
         gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
+        space = new JLabel();
+        space.setPreferredSize(new Dimension(280,800));
     }
 
     private void addPanels() {
         this.add((startingPanel),BorderLayout.NORTH);
         this.add((gamePanel),BorderLayout.CENTER);
-        this.add((scoreBoardPanel),BorderLayout.WEST);
+        this.add((space), BorderLayout.WEST);
+        //this.add((scoreBoardPanel),BorderLayout.WEST);
     }
 /*
     public void startGameMode2(){
@@ -191,5 +195,13 @@ public class View extends JFrame{
 
     public void setController(Controller controller) {
         this.controller = controller;
+    }
+
+    public GameModePanel getStartingPanel() {
+        return startingPanel;
+    }
+
+    public void setStartingPanel(GameModePanel startingPanel) {
+        this.startingPanel = startingPanel;
     }
 }

@@ -18,17 +18,15 @@ public class GameMode2 implements Runnable {
                                     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å', '¨',
                                     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä',
                                     'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'};
-    private char[] randomChars1 = new char[4];
-    private char[] randomChars2 = new char[4];
+    private char[] randomChars1 = new char[3];
+    private char[] randomChars2 = new char[3];
     private Random random = new Random();
     private int rounds;
     private int index = 0;
     private int count = 0;
-    private boolean running = true;
     private List<JButton> player1ButtonArray = new ArrayList<>();
     private List<JButton> player2ButtonArray = new ArrayList<>();
     private boolean turn = true; // Player 1 = true && player 2 = false
-    private int[] status = new int[4];
     private Thread fingerTwisterThread;
     public GameMode2(View view, Controller controller) {
         this.controller = controller;
@@ -43,7 +41,7 @@ public class GameMode2 implements Runnable {
         randomizeChar(randomChars1, randomChars2, 1);
         randomizeChar(randomChars2, randomChars1, 2);
         //Detta kommer behövas ändras!!!!!!!!
-        index = (index + 1) % 4;
+        index = (index + 1) % 3;
 
     }
 
@@ -85,7 +83,7 @@ public class GameMode2 implements Runnable {
     @Override
     public void run() {
         runRandomizer();
-        while(running){
+        while(true){
             lightUpKeys();
         }
     }
@@ -209,14 +207,6 @@ public class GameMode2 implements Runnable {
         this.turn = turn;
     }
 
-    public int[] getStatus() {
-        return status;
-    }
-
-    public void setStatus(int[] status) {
-        this.status = status;
-    }
-
     public void timeIsUpLoserEvent(){
         if (turn){
             JOptionPane.showMessageDialog(null,"Player 1 lost, Player 2 Wins");
@@ -224,15 +214,6 @@ public class GameMode2 implements Runnable {
         if (!turn){
             JOptionPane.showMessageDialog(null,"Player 2 lost, Player 1 Wins");
         }
-    }
-
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
     }
 
     public List<JButton> getPlayer1ButtonArray() {

@@ -218,13 +218,13 @@ public class GamePanel extends JPanel implements KeyListener {
         }
 
         else{
-            for (JButton button: controller.getGm2().getPlayer1ButtonArray()) {
-                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(button.getText())) {
+            for (char c: controller.getGm2().getRandomChars1()) {
+                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(c))){
                     JOptionPane.showMessageDialog(null, "Player1 lost");
                 }
             }
-            for (JButton button: controller.getGm2().getPlayer2ButtonArray()) {
-                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(button.getText())){
+            for (char c: controller.getGm2().getRandomChars2()) {
+                if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(c))){
                     JOptionPane.showMessageDialog(null, "Player2 lost");
                 }
             }

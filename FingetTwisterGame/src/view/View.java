@@ -65,14 +65,16 @@ public class View extends JFrame{
         gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
         space = new JLabel();
-        space.setPreferredSize(new Dimension(280,800));
+        space.setPreferredSize(new Dimension(550,800));
     }
 
     private void addPanels() {
         this.add((startingPanel),BorderLayout.NORTH);
         this.add((gamePanel),BorderLayout.CENTER);
         this.add(space,BorderLayout.WEST);
-        this.add((scoreBoardPanel),BorderLayout.WEST);
+        if (!controller.isGamemode()){
+            this.add((scoreBoardPanel),BorderLayout.WEST);
+        }
     }
 /*
     public void startGameMode2(){

@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 
 public class ScoreBoardViewer extends JFrame implements Runnable {
     public static void main(String[]args){
-
+        new ScoreBoardViewer();
     }
     private JPanel panel;
     private JTextArea textArea;
@@ -23,7 +23,7 @@ public class ScoreBoardViewer extends JFrame implements Runnable {
     private Scoreboard scoreboard;
     private View view;
 
-    public ScoreBoardViewer(View view) throws HeadlessException {
+    public ScoreBoardViewer() throws HeadlessException {
         this.view = view;
         // super("ScoreBoard");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,7 +48,6 @@ public class ScoreBoardViewer extends JFrame implements Runnable {
     }
 
     public void setTextArea() throws IOException {
-        this.scoreboard = view.getController().getScoreBoard();
         String name;
         String score;
         String textfield = " ";

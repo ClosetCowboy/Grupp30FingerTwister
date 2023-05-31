@@ -80,4 +80,5 @@ public class ScoreboardPanel extends JPanel implements Runnable {
 
         }
     }
+
 }

@@ -143,7 +143,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
                     } else if (button.equals(view.getController().getLitButton2())) {
-                        button.setBackground(Color.GREEN);
+                        button.setBackground(Color.BLUE);
                         button.setOpaque(true);
                         button.setVisible(true);
                         view.getController().setKeyCount(view.getController().getKeyCount() + 1);
@@ -221,12 +221,12 @@ public class GamePanel extends JPanel implements KeyListener {
         else{
             for (char c: controller.getGm2().getRandomChars1()) {
                 if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(c))){
-                    JOptionPane.showMessageDialog(null, "Player1 lost");
+                    JOptionPane.showMessageDialog(null, "Player 1 lost");
                 }
             }
             for (char c: controller.getGm2().getRandomChars2()) {
                 if (String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(c))){
-                    JOptionPane.showMessageDialog(null, "Player2 lost");
+                    JOptionPane.showMessageDialog(null, "Player 2 lost");
                 }
             }
         }

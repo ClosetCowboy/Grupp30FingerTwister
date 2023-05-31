@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class GameModePanel extends JPanel implements ActionListener {
@@ -22,6 +23,11 @@ public class GameModePanel extends JPanel implements ActionListener {
     private JLabel player1Text;
     private JLabel player2Text;
     private boolean gamemode;
+    private JComboBox<String> colorComboBox;
+    private JComboBox<String> colorComboBox2;
+
+    private String player1Color;
+    private String player2Color;
     public GameModePanel(View view, Controller controller, boolean gamemode) {
         this.controller = controller;
         this.view = view;
@@ -55,8 +61,6 @@ public class GameModePanel extends JPanel implements ActionListener {
         addSpace();
         addSpace();
     }
-
-
 
     private void addSpace() {
         spaceInBetween = new JLabel();
@@ -168,5 +172,21 @@ public class GameModePanel extends JPanel implements ActionListener {
 
     public JLabel getPlayer2Text() {
         return player2Text;
+    }
+
+    public String getPlayer1Color() {
+        return player1Color;
+    }
+
+    public void setPlayer1Color(String player1Color) {
+        this.player1Color = player1Color;
+    }
+
+    public String getPlayer2Color() {
+        return player2Color;
+    }
+
+    public void setPlayer2Color(String player2Color) {
+        this.player2Color = player2Color;
     }
 }

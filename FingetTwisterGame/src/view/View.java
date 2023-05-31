@@ -61,7 +61,7 @@ public class View extends JFrame{
 
      */
     private void createPanels() {
-        startingPanel = new GameModePanel(this, controller);
+        startingPanel = new GameModePanel(this, controller, controller.isGamemode());
         gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
         space = new JLabel();

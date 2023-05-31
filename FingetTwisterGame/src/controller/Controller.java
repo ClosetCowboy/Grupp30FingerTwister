@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 
 public class Controller implements ActionListener, Runnable {
-    //Assosiera dessa String knapparna med buttonarr och i gamemode2
     private final String[][] arr = {
             {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "´",},
             {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å", "¨", "'"},
@@ -33,10 +32,12 @@ public class Controller implements ActionListener, Runnable {
     private int keyCount;
     private GameMode2 gm2;
     private boolean gamemode;//If this is true, gamemode is fingertwister/Multiplayer, if false, gamemode is singleplayer
+    private boolean difficulty;
 
-    public Controller(boolean gamemode) {
+    public Controller(boolean gamemode, boolean difficulty) {
         this.gamemode = gamemode;
         this.view = new View(this);
+        this.difficulty = difficulty;
     }
 
     public void startGame() {
@@ -178,4 +179,13 @@ public class Controller implements ActionListener, Runnable {
     public void setGamemode(boolean gamemode) {
         this.gamemode = gamemode;
     }
+
+    public boolean isDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(boolean difficulty) {
+        this.difficulty = difficulty;
+    }
+
 }

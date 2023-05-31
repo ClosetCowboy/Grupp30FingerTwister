@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 public class StartMenu {
     private View view;
+    private JRadioButton hardChoise;
+    private boolean difficulty = false;
     public StartMenu() {
         JFrame frame = new JFrame();
         frame.setLayout(null);
@@ -17,6 +19,38 @@ public class StartMenu {
         multiplayerButton.setBounds(240, 270, 600, 80);
         multiplayerButton.setFont(new Font("SansSerif", Font.PLAIN, 34));
         frame.add(multiplayerButton);
+
+        JRadioButton easyChoise = new JRadioButton("Easy");
+        easyChoise.setBounds(850,250,100,60);
+        easyChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        easyChoise.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == easyChoise){
+                    easyChoise.setSelected(true);
+                    hardChoise.setSelected(false);
+                    difficulty = false;
+                }
+            }
+        });
+        easyChoise.setEnabled(true);
+        frame.add(easyChoise);
+
+
+        hardChoise = new JRadioButton("Hard");
+        hardChoise.setBounds(850,300,100,60);
+        hardChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        hardChoise.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == hardChoise){
+                    hardChoise.setSelected(true);
+                    easyChoise.setSelected(false);
+                    difficulty = true;
+                }
+            }
+        });
+        frame.add(hardChoise);
 
         JButton singlePlayerButton = new JButton("Singleplayer");
         singlePlayerButton.setBounds(240, 650, 600, 80);
@@ -69,16 +103,16 @@ public class StartMenu {
         multiplayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent multiPlayerPressed) {
                 frame.setVisible(false);
-                new Controller(true);
-                //new VersionPanel(true); ToDo Detta ska tillbaka senare!!!
+                new Controller(true, difficulty);
+                //new VersionPanel(true, difficulty); ToDo Detta ska tillbaka senare!!!
             }
         });
 
         singlePlayerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent singlePlayerPressed) {
                 frame.setVisible(false);
-                new Controller(false);
-                //new VersionPanel(false); ToDo Detta ska tillbaka senare!!!
+                new Controller(false, difficulty);
+                //new VersionPanel(false, difficulty); ToDo Detta ska tillbaka senare!!!
             }
         });
     }

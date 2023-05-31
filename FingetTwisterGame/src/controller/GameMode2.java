@@ -18,8 +18,8 @@ public class GameMode2 implements Runnable {
                                     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å', '¨',
                                     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä',
                                     'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'};
-    private char[] randomChars1 = new char[3];
-    private char[] randomChars2 = new char[3];
+    private char[] randomChars1;
+    private char[] randomChars2;
     private Random random = new Random();
     private int rounds;
     private int index = 0;
@@ -28,11 +28,29 @@ public class GameMode2 implements Runnable {
     private List<JButton> player2ButtonArray = new ArrayList<>();
     private boolean turn = true; // Player 1 = true && player 2 = false
     private Thread fingerTwisterThread;
-    public GameMode2(View view, Controller controller) {
+    private boolean difficulty;
+    private int intDifficulty;
+    public GameMode2(View view, Controller controller, boolean difficulty) {
         this.controller = controller;
         this.view = view;
+        this.difficulty = difficulty;
+
+        checkDifficulty();
         fingerTwisterThread = new Thread(this);
         fingerTwisterThread.start();
+    }
+
+    private void checkDifficulty() {
+        if (difficulty){
+            intDifficulty = 3;
+            randomChars1 = new char[this.intDifficulty];
+            randomChars2 = new char[this.intDifficulty];
+
+        }else{
+            intDifficulty = 2;
+            randomChars1 = new char[this.intDifficulty];
+            randomChars2 = new char[this.intDifficulty];
+        }
     }
 
     // Detta är algoritmen som fixar att det blir random tecken
@@ -40,8 +58,8 @@ public class GameMode2 implements Runnable {
 
         randomizeChar(randomChars1, randomChars2, 1);
         randomizeChar(randomChars2, randomChars1, 2);
-        //Detta kommer behövas ändras!!!!!!!!
-        index = (index + 1) % 3;
+
+        index = (index + 1) % this.intDifficulty;
 
     }
 
@@ -207,15 +225,6 @@ public class GameMode2 implements Runnable {
         this.turn = turn;
     }
 
-    public void timeIsUpLoserEvent(){
-        if (turn){
-            JOptionPane.showMessageDialog(null,"Player 1 lost, Player 2 Wins");
-        }
-        if (!turn){
-            JOptionPane.showMessageDialog(null,"Player 2 lost, Player 1 Wins");
-        }
-    }
-
     public List<JButton> getPlayer1ButtonArray() {
         return player1ButtonArray;
     }
@@ -238,6 +247,30 @@ public class GameMode2 implements Runnable {
 
     public void setRounds(int rounds) {
         this.rounds = rounds;
+    }
+
+    public int getIntDifficulty() {
+        return intDifficulty;
+    }
+
+    public void setIntDifficulty(int intDifficulty) {
+        this.intDifficulty = intDifficulty;
+    }
+
+    public Thread getFingerTwisterThread() {
+        return fingerTwisterThread;
+    }
+
+    public void setFingerTwisterThread(Thread fingerTwisterThread) {
+        this.fingerTwisterThread = fingerTwisterThread;
+    }
+
+    public boolean isDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(boolean difficulty) {
+        this.difficulty = difficulty;
     }
 }
 

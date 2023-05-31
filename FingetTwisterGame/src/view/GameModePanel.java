@@ -14,26 +14,32 @@ public class GameModePanel extends JPanel implements ActionListener {
     private JComboBox<String> gameModeChoser;
     //private String [] choices = new String[]{"FingerTwister", "TypingRace"};
     private JButton startButton;
-    private int count = 5;
+    private int count = 3;
     private Timer secTimer;
     private Controller controller;
     private JLabel scoreboardText;
     private JLabel spaceInBetween;
     private JLabel player1Text;
     private JLabel player2Text;
-    public GameModePanel(View view, Controller controller) {
+    private boolean gamemode;
+    public GameModePanel(View view, Controller controller, boolean gamemode) {
         this.controller = controller;
         this.view = view;
+        this.gamemode = gamemode;
         addAllLabels();
     }
 
     private void addAllLabels() {
         addSpaceInbetween();
-        addPlayer1Text();
+        if (gamemode){
+            addPlayer1Text();
+        }
         addSpaceInbetween();
         addStartButton();
         addSpaceInbetween();
-        addPlayer2Text();
+        if (gamemode){
+            addPlayer1Text();
+        }
         addSpaceInbetween();
     }
 
@@ -94,12 +100,11 @@ public class GameModePanel extends JPanel implements ActionListener {
                 view.setVisible(false);
                 new StartMenu();
             }else {
-                startButton.setText("5");
+                startButton.setText("3");
                 secTimer = new Timer(1000, this);
                 secTimer.start();
             }
         }
-
 
         if (e.getSource() instanceof Timer){
             count--;
@@ -114,7 +119,7 @@ public class GameModePanel extends JPanel implements ActionListener {
                 //view.setGamePanel(new GamePanel(view));
                 //view.getController().startGame();
                 if (view.getController().isGamemode()){
-                    view.getController().setGm2(new GameMode2(view, this.controller));
+                    view.getController().setGm2(new GameMode2(view, this.controller, controller.isDifficulty()));
                 }else view.getController().startGame();
 
             }

@@ -11,9 +11,11 @@ public class VersionPanel extends JFrame implements ActionListener {
     private JButton rgbButton;
     private JButton defaultButton;
     private boolean gameMode;
+    private boolean difficulty = false;
 
-    public VersionPanel(boolean gameMode) {
+    public VersionPanel(boolean gameMode, boolean difficulty) {
         this.gameMode = gameMode;
+        this.difficulty = difficulty;
         setTitle("Home Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -43,11 +45,11 @@ public class VersionPanel extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == rgbButton)   {
-            new Controller(gameMode);
+            new Controller(gameMode, difficulty);
             this.setVisible(false);
         }
         if (e.getSource() == defaultButton){
-            new Controller(gameMode);
+            new Controller(gameMode, difficulty);
             this.setVisible(false);
         }
     }

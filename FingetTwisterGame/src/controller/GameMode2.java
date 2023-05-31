@@ -55,14 +55,12 @@ public class GameMode2 implements Runnable {
 
     // Detta är algoritmen som fixar att det blir random tecken
     public void runRandomizer() {
-
         randomizeChar(randomChars1, randomChars2, 1);
-        randomizeChar(randomChars2, randomChars1, 2);
-
-        index = (index + 1) % this.intDifficulty;
-
     }
-
+    public void runRandomizer2(){
+        randomizeChar(randomChars2, randomChars1, 2);
+        index = (index + 1) % this.intDifficulty;
+    }
 
 
     public void randomizeChar(char[] randomChar, char[] comparisonArray, int arrayNumber) {

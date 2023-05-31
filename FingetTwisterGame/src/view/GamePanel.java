@@ -99,7 +99,8 @@ public class GamePanel extends JPanel implements KeyListener {
                 if ((String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(controller.getGm2().getRandomChars1()[i]))) && controller.getGm2().isTurn()) {
                     //Skickas meddelande till GUI om någon förändring
                     controller.getGm2().setTurn(false);
-//                controller.getGm2().nextTurn();
+                    controller.getGm2().runRandomizer2();
+//                  controller.getGm2().nextTurn();
                 }
             }
             for (int i = 0; i < controller.getGm2().getRandomChars2().length; i++) {

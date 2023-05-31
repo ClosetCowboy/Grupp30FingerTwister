@@ -38,7 +38,7 @@ public class GameModePanel extends JPanel implements ActionListener {
         addStartButton();
         addSpaceInbetween();
         if (gamemode){
-            addPlayer1Text();
+            addPlayer2Text();
         }
         addSpaceInbetween();
     }

@@ -41,7 +41,7 @@ public class ScoreboardPanel extends JPanel implements Runnable {
 
     private void addSpaceInBetween() {
         spaceBeforeScoreboard = new JLabel();
-        spaceBeforeScoreboard.setPreferredSize(new Dimension(50,100));
+        spaceBeforeScoreboard.setPreferredSize(new Dimension(100,100));
         this.add(spaceBeforeScoreboard);
     }
 

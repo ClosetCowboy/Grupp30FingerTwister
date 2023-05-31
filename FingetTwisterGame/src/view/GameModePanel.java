@@ -26,25 +26,39 @@ public class GameModePanel extends JPanel implements ActionListener {
         this.controller = controller;
         this.view = view;
         this.gamemode = gamemode;
-        addAllLabels();
+        if (gamemode){
+            addAllLabelsFingerTwister();
+        }else addAllLabelsTypeRacer();
     }
 
-    private void addAllLabels() {
-        addSpaceInbetween();
-        if (gamemode){
-            addPlayer1Text();
-        }
-        addSpaceInbetween();
+    private void addAllLabelsFingerTwister() {
+        addSpace();
+        addPlayer1Text();
+        addSpace();
         addStartButton();
-        addSpaceInbetween();
-        if (gamemode){
-            addPlayer2Text();
-        }
-        addSpaceInbetween();
+        addSpace();
+        addPlayer2Text();
+        addSpace();
+    }
+    private void addAllLabelsTypeRacer() {
+        addScoreboardText();
+        addSpace();
+        addSpace();
+        addSpace();
+        addSpace();
+        addSpace();
+        addSpace();
+        addStartButton();
+        addSpace();
+        addSpace();
+        addSpace();
+        addSpace();
+        addSpace();
     }
 
 
-    private void addSpaceInbetween() {
+
+    private void addSpace() {
         spaceInBetween = new JLabel();
         spaceInBetween.setPreferredSize(new Dimension(150,100));
         this.add(spaceInBetween);

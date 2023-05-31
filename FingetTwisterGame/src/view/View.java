@@ -14,7 +14,7 @@ public class View extends JFrame{
 
     private GamePanel gamePanel;
     private CountdownPanel countDownPanel;
-    private JPanel scoreBoardPanel;
+    private ScoreboardPanel scoreBoardPanel;
     private GameModePanel startingPanel;
     private Controller controller;
     private boolean timesUp = false;
@@ -71,8 +71,8 @@ public class View extends JFrame{
     private void addPanels() {
         this.add((startingPanel),BorderLayout.NORTH);
         this.add((gamePanel),BorderLayout.CENTER);
-        this.add((space), BorderLayout.WEST);
-        //this.add((scoreBoardPanel),BorderLayout.WEST);
+        this.add(space,BorderLayout.WEST);
+        this.add((scoreBoardPanel),BorderLayout.WEST);
     }
 /*
     public void startGameMode2(){
@@ -181,11 +181,11 @@ public class View extends JFrame{
         this.countDownPanel = countDownPanel;
     }
 
-    public JPanel getScoreBoardPanel() {
+    public ScoreboardPanel getScoreBoardPanel() {
         return scoreBoardPanel;
     }
 
-    public void setScoreBoardPanel(JPanel scoreBoardPanel) {
+    public void setScoreBoardPanel(ScoreboardPanel scoreBoardPanel) {
         this.scoreBoardPanel = scoreBoardPanel;
     }
 

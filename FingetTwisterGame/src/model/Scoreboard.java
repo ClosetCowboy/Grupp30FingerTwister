@@ -2,15 +2,18 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static java.util.Collections.*;
 
 public class Scoreboard {
-    private ArrayList<Score> scoreboard;
+    private ArrayList<Score> scoreBoard;
 
+    /**
+     * Constructs a Scoreboard object and initializes the scoreBoard ArrayList.
+     * It reads scores from a file and populates the scoreBoard with the read scores.
+     */
     public Scoreboard(){
-        scoreboard = new ArrayList<>();
+        scoreBoard = new ArrayList<>();
         String name;
         int score;
         try {
@@ -24,28 +27,42 @@ public class Scoreboard {
                 score = Integer.parseInt(bufferedReader.readLine());
                 //  System.out.println(score);
                 Score newscore = new Score(name, score);
-                scoreboard.add(newscore);
+                scoreBoard.add(newscore);
                 sortScoreBoard();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Adds a new score to the scoreboard and writes the updated scoreboard to the file.
+     *
+     * @param name the name of the player
+     * @param score the score achieved by the player
+     * @throws IOException if an I/O error occurs while writing to the file
+     */
     public void setNewScore(String name, int score) throws IOException {
         Score newscore = new Score(name, score);
-        scoreboard.add(newscore);
+        scoreBoard.add(newscore);
         sortScoreBoard();
         writeToFile();
     }
+
+    /**
+     * Writes the scores from the scoreboard to a file.
+     *
+     * @throws IOException if an I/O error occurs while writing to the file
+     */
     public void writeToFile() throws IOException {
         String playerName;
         String playerScore;
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("ScoreBoard.txt", false));
-        for(int i=0; i<scoreboard.size(); i++){
-            playerName = scoreboard.get(i).getName();
-            playerScore = String.valueOf(scoreboard.get(i).getScore());
-            bufferedWriter.write(" "+playerName);
+        for (Score score : scoreBoard) {
+            playerName = score.getName();
+            playerScore = String.valueOf(score.getScore());
+            bufferedWriter.write(" " + playerName);
             bufferedWriter.newLine();
             bufferedWriter.write(playerScore);
             bufferedWriter.newLine();
@@ -53,14 +70,11 @@ public class Scoreboard {
         }
         bufferedWriter.close();
     }
+
+    public ArrayList<Score> getScoreBoard(){
+        return scoreBoard;
+    }
     public void sortScoreBoard(){
-        sort(scoreboard);
-
+        sort(scoreBoard);
     }
-
-    public ArrayList<Score> getScoreboard(){
-        return scoreboard;
-    }
-
-
 }

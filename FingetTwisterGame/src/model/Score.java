@@ -2,27 +2,11 @@ package model;
 
 
 public class Score implements Comparable{
-    private String name;
-    private int score;
+    private final String name;
+    private final int score;
 
     public Score(String name, int score){
         this.name = name;
-        this.score = score;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
         this.score = score;
     }
 
@@ -31,5 +15,12 @@ public class Score implements Comparable{
         int score = ((Score)compareScore).getScore();
         return score-this.score;
 
+    }
+
+    public int getScore() {
+        return score;
+    }
+    public String getName() {
+        return name;
     }
 }

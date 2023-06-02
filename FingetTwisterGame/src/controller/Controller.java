@@ -12,7 +12,10 @@ import java.util.Objects;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.Timer;
-
+/**
+ * The Controller class handles the logic and interactions between the View and Model in the game.
+ * It implements the ActionListener and Runnable interfaces.
+ */
 public class Controller implements ActionListener, Runnable {
     private final String[][] arr = {
             {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "´",},
@@ -20,26 +23,32 @@ public class Controller implements ActionListener, Runnable {
             {"A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", "Ä"},
             {"Z", "X", "C", "V", "B", "N", "M", ",", ".", "-"}};
     private View view ;
+    private Scoreboard scoreBoard;
+    private GameMode2 gm2;
     private ArrayList<JButton> buttonArr = new ArrayList<>();
     private JButton litButton1;
     private JButton litButton2;
-    private Timer timer = new Timer(5000, this);
-    private Thread thread;
-    //private StartingWindow startingWindow;
-    private Scoreboard scoreBoard;
-    // private ScoreBoardViewer scoreBoard;
-
     private int keyCount;
-    private GameMode2 gm2;
     private boolean gamemode;//If this is true, gamemode is fingertwister/Multiplayer, if false, gamemode is singleplayer
-    private boolean difficulty;
+    private final boolean difficulty;
 
+
+    /**
+     * Constructs a Controller object.
+     *
+     * @param gamemode   true for fingertwister/Multiplayer mode, false for singleplayer mode.
+     * @param difficulty the difficulty level of the game.
+     */
     public Controller(boolean gamemode, boolean difficulty) {
         this.gamemode = gamemode;
         this.view = new View(this);
         this.difficulty = difficulty;
     }
 
+    /**
+     * Starts the game by initializing the lit buttons and starting the game timer.
+     * It ensures that the two lit buttons have different text values.
+     */
     public void startGame() {
         this.litButton1 = this.randomize_new_button();
         this.litButton2 = this.randomize_new_button();
@@ -50,6 +59,12 @@ public class Controller implements ActionListener, Runnable {
             this.litButton1 = this.randomize_new_button();
         }
     }
+
+    /**
+     * Randomly selects a new button from the available buttons and returns it.
+     *
+     * @return the randomly selected button.
+     */
     public JButton randomize_new_button() {
         JButton jButton = null;
         Random random = new Random();
@@ -72,15 +87,13 @@ public class Controller implements ActionListener, Runnable {
         return jButton;
     }
 
-
-    public Timer getTimer() {
-        return this.timer;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
+    /**
+     * Writes the player's name and score to the ScoreBoard.txt file.
+     *
+     * @param name  the name of the player.
+     * @param score the score achieved by the player.
+     * @throws IOException if an I/O error occurs while writing to the file.
+     */
     public void setNewScore(String name, int score) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("ScoreBoard.txt", true));
         String playerNameScore = String.format(" Name: %s Score: %d", name, score);
@@ -88,6 +101,12 @@ public class Controller implements ActionListener, Runnable {
         bufferedWriter.newLine();
         bufferedWriter.close();
     }
+
+    /**
+     * Updates the lit buttons when a button is clicked.
+     *
+     * @param button the button that was clicked.
+     */
     public void newButton(JButton button) {
         if (button == this.litButton1) {
             this.litButton1 = this.randomize_new_button();
@@ -106,11 +125,23 @@ public class Controller implements ActionListener, Runnable {
 
         scoreBoard.setNewScore(name, score);
     }
+
     public Scoreboard getScoreBoard(){
         if(scoreBoard == null){
             newScoreboard();
         }
         return scoreBoard;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof Timer) {
+            this.view.setTimesUp(true);
+        }
+
+    }
+
+    public void run() {
+        this.startGame();
     }
 
     public String[][] getArr() {
@@ -121,53 +152,12 @@ public class Controller implements ActionListener, Runnable {
         return this.buttonArr;
     }
 
-    public void setButtonArr(ArrayList<JButton> buttonArr) {
-        this.buttonArr = buttonArr;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof Timer) {
-            this.view.setTimesUp(true);
-        }
-
-    }
-    public void run() {
-        this.startGame();
-    }
-
-    public Thread getThread() {
-        return this.thread;
-    }
-
-    public void setThread(Thread thread) {
-        this.thread = thread;
-    }
-
-    public void nextGame() {
-        this.view = new View(this);
-    }
-
-    public JButton getLitButton1() {
-        return this.litButton1;
-    }
-
-    public JButton getLitButton2() {
-        return this.litButton2;
-    }
 
 
-    public int getKeyCount() {
-        return keyCount;
-    }
-
-    public void setKeyCount(int keyCount) {
-        this.keyCount = keyCount;
-    }
 
     public GameMode2 getGm2() {
         return this.gm2;
     }
-
     public void setGm2(GameMode2 gm2) {
         this.gm2 = gm2;
     }
@@ -176,16 +166,22 @@ public class Controller implements ActionListener, Runnable {
         return gamemode;
     }
 
-    public void setGamemode(boolean gamemode) {
-        this.gamemode = gamemode;
+    public int getKeyCount() {
+        return keyCount;
+    }
+    public void setKeyCount(int keyCount) {
+        this.keyCount = keyCount;
+    }
+
+    public JButton getLitButton1() {
+        return this.litButton1;
+    }
+    public JButton getLitButton2() {
+        return this.litButton2;
     }
 
     public boolean isDifficulty() {
         return difficulty;
-    }
-
-    public void setDifficulty(boolean difficulty) {
-        this.difficulty = difficulty;
     }
 
 }

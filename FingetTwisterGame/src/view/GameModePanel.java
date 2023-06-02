@@ -80,21 +80,7 @@ public class GameModePanel extends JPanel implements ActionListener {
         player1Text.setFont(new Font("Italc", Font.BOLD,60));
         this.add(player1Text);
     }
-/*
-    private void addGameModeChoser() {
-        gameModeChoser = new JComboBox<>(choices);
-        gameModeChoser.addActionListener(this);
-        gameModeChoser.setPreferredSize(new Dimension(300,100));
-        gameModeChoser.setFont(new Font("Font.ITALIC",Font.ITALIC,30));
 
-        JLabel gameModeText = new JLabel("Gamemode:");
-        gameModeText.setFont(new Font("Font.ITALIC",Font.ITALIC,30));
-
-        this.add(gameModeText);
-        this.add(gameModeChoser);
-    }
-
- */
 
     private void addStartButton() {
         startButton = new JButton("Start");

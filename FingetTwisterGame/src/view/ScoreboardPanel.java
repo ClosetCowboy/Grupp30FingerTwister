@@ -7,11 +7,17 @@ import java.awt.*;
 import java.io.*;
 
 public class ScoreboardPanel extends JPanel implements Runnable {
-    private View view;
-    private JTextArea textArea;
+    private final View view;
     private Scoreboard scoreboard;
+    private JTextArea textArea;
     private JLabel spaceBeforeScoreboard;
 
+    /**
+     * Constructs a ScoreboardPanel object with the specified view.
+     *
+     * @param view the view object
+     * @throws HeadlessException if the graphics environment is not available
+     */
     public ScoreboardPanel(View view) throws HeadlessException {
         this.view = view;
         this.textArea = new JTextArea();
@@ -38,30 +44,34 @@ public class ScoreboardPanel extends JPanel implements Runnable {
         thread.start();
     }
 
+    /**
+     * Adds space before the scoreboard.
+     */
     private void addSpaceInBetween() {
         spaceBeforeScoreboard = new JLabel();
         spaceBeforeScoreboard.setPreferredSize(new Dimension(100,100));
         this.add(spaceBeforeScoreboard);
     }
 
-
+    /**
+     * Sets the text area with the content of the scoreboard.
+     *
+     * @throws IOException if an I/O error occurs while reading the scoreboard
+     */
     public void setTextArea() throws IOException {
 
         scoreboard = view.getController().getScoreBoard();
         String name;
         String score;
         String textfield = " ";
-        for(int i = 0; i<scoreboard.getScoreBoard().size(); i++){
+        for(int i = 0; i < scoreboard.getScoreBoard().size(); i++){
             name = scoreboard.getScoreBoard().get(i).getName();
-            //  System.out.println("ScoreboardPanel");
-            //  System.out.println(name);
+
             score = String.valueOf(scoreboard.getScoreBoard().get(i).getScore());
-            // System.out.println(score);
-            // textfield = textfield + "Name: " + name + "Score: " + score + "\n";
+
             textfield = textfield + String.format("%12s, %10s", name , score) + "\n";
         }
         this.textArea.setText(textfield);
-        //System.out.println("TextField" + "\n" + textfield);
     }
 
     public void run() {
@@ -70,14 +80,9 @@ public class ScoreboardPanel extends JPanel implements Runnable {
             try {
                 setTextArea();
                 Thread.sleep(100);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
     }
-
 }

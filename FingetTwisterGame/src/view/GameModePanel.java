@@ -9,25 +9,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Objects;
+/**
 
+ The GameModePanel class represents a panel that displays the game mode options and controls.
+
+ It extends the JPanel class and implements the ActionListener interface.
+ */
 public class GameModePanel extends JPanel implements ActionListener {
     private View view;
-    private JComboBox<String> gameModeChoser;
-    //private String [] choices = new String[]{"FingerTwister", "TypingRace"};
     private JButton startButton;
-    private int count = 3;
     private Timer secTimer;
     private Controller controller;
     private JLabel scoreboardText;
     private JLabel spaceInBetween;
     private JLabel player1Text;
     private JLabel player2Text;
+    private int count = 3;
     private boolean gamemode;
-    private JComboBox<String> colorComboBox;
-    private JComboBox<String> colorComboBox2;
 
-    private String player1Color;
-    private String player2Color;
+    /**
+     * Constructs a GameModePanel object with the specified view, controller, and game mode.
+     *
+     * @param view       The View object associated with the panel.
+     * @param controller The Controller object associated with the panel.
+     * @param gamemode   The boolean value indicating the game mode.
+     */
     public GameModePanel(View view, Controller controller, boolean gamemode) {
         this.controller = controller;
         this.view = view;
@@ -37,6 +43,9 @@ public class GameModePanel extends JPanel implements ActionListener {
         }else addAllLabelsTypeRacer();
     }
 
+    /**
+     * Adds all the labels and buttons for the Finger Twister game mode.
+     */
     private void addAllLabelsFingerTwister() {
         addSpace();
         addPlayer1Text();
@@ -46,6 +55,9 @@ public class GameModePanel extends JPanel implements ActionListener {
         addPlayer2Text();
         addSpace();
     }
+    /**
+     * Adds all the labels and buttons for the Type Racer game mode.
+     */
     private void addAllLabelsTypeRacer() {
         addScoreboardText();
         addSpace();
@@ -62,6 +74,9 @@ public class GameModePanel extends JPanel implements ActionListener {
         addSpace();
     }
 
+    /**
+     * Adds a space label to create spacing between components.
+     */
     private void addSpace() {
         spaceInBetween = new JLabel();
         spaceInBetween.setPreferredSize(new Dimension(150,100));
@@ -74,13 +89,13 @@ public class GameModePanel extends JPanel implements ActionListener {
         player2Text.setFont(new Font("Italc", Font.BOLD,60));
         this.add(player2Text);
     }
+
     private void addPlayer1Text() {
         player1Text = new JLabel("Player 1");
         player1Text.setPreferredSize(new Dimension(250,100));
         player1Text.setFont(new Font("Italc", Font.BOLD,60));
         this.add(player1Text);
     }
-
 
     private void addStartButton() {
         startButton = new JButton("Start");
@@ -89,6 +104,7 @@ public class GameModePanel extends JPanel implements ActionListener {
         startButton.setPreferredSize(new Dimension(300,100));
         this.add(startButton);
     }
+
     private void addScoreboardText(){
         scoreboardText = new JLabel("Scoreboard");
         scoreboardText.setFont(new Font("Font.ITALIC",Font.ITALIC,54));
@@ -119,60 +135,20 @@ public class GameModePanel extends JPanel implements ActionListener {
                 // TODO: Istället för att starta ett nytt spel ska man skickas tillbaka till GameModePanel
                 // transferFocus används för att ge fokus till GamePanel i fönstret för att den ska lyssna efter keystrokes.
                 view.getGamePanel().transferFocus();
-                //view.getGamePanel().createKeyboard();
-                //view.setGamePanel(new GamePanel(view));
-                //view.getController().startGame();
                 if (view.getController().isGamemode()){
                     view.getController().setGm2(new GameMode2(view, this.controller, controller.isDifficulty()));
                 }else view.getController().startGame();
 
             }
         }
-
-/*
-        if (e.getSource() == getGameModeChoser()){
-            for ( int i = 0; i < choices.length;i++ ){
-                if (e.getSource() == "FingerTwister"){
-                    JOptionPane.showMessageDialog(null,"You are now playing FingerTwister!");
-                }
-                if (e.getSource() == "TypingRace"){
-                    JOptionPane.showMessageDialog(null,"You are now playing TypingRace!");
-                }
-            }
-        }
-
- */
     }
 
-    public JComboBox<String> getGameModeChoser() {
-        return gameModeChoser;
-    }
-
-    public void setGameModeChoser(JComboBox<String> gameModeChoser) {
-        this.gameModeChoser = gameModeChoser;
-    }
 
     public JLabel getPlayer1Text() {
         return player1Text;
     }
-
     public JLabel getPlayer2Text() {
         return player2Text;
     }
 
-    public String getPlayer1Color() {
-        return player1Color;
-    }
-
-    public void setPlayer1Color(String player1Color) {
-        this.player1Color = player1Color;
-    }
-
-    public String getPlayer2Color() {
-        return player2Color;
-    }
-
-    public void setPlayer2Color(String player2Color) {
-        this.player2Color = player2Color;
-    }
 }

@@ -13,6 +13,11 @@ public class VersionPanel extends JFrame implements ActionListener {
     private boolean gameMode;
     private boolean difficulty = false;
 
+    /**
+     * Constructs a VersionPanel object.
+     * @param gameMode the game mode (multiplayer or singleplayer)
+     * @param difficulty the difficulty level
+     */
     public VersionPanel(boolean gameMode, boolean difficulty) {
         this.gameMode = gameMode;
         this.difficulty = difficulty;

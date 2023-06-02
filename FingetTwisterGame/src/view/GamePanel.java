@@ -7,38 +7,33 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * The panel that displays the game interface and handles keyboard input.
+ */
 public class GamePanel extends JPanel implements KeyListener {
-    private View view;
-    private Controller controller;
-    //private String[] arr = new String [] {"q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a",
-    // "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
+    private final View view;
+    private final Controller controller;
 
-
+    /**
+     * Constructs a GamePanel object.
+     * @param view The View object.
+     * @param controller The Controller object.
+     */
     public GamePanel(View view, Controller controller){
         this.view = view;
         this.controller = controller;
         this.setSize(new Dimension(960, 500));
-        //setBounds(200,200,200,200);
-        //this.setBorder(new LineBorder(Color.BLACK));
         this.setFocusable(true);
         view.add(this);
         createKeyboard();
         this.setVisible(true);
-
     }
 
+    /**
+     * Creates the keyboard layout with buttons for the game.
+     */
     public void createKeyboard(){
-        /*
-        for (int i = 0; i < arr.length; ++i) {
-            String s = arr[i];
-            JButton button = new JButton(s);
-            button.addKeyListener(this);
-            button.setOpaque(true);
-            button.setBorderPainted(false);
-            button.setVisible(true);
-            this.add(button);
-        }*/
+
         this.setLayout(new GridBagLayout());
 
         JPanel pRow = new JPanel();
@@ -60,29 +55,13 @@ public class GamePanel extends JPanel implements KeyListener {
                 pRow.add(button);
                 view.getController().getButtonArr().add(button);
             }
-
             this.add(pRow, c);
         }
-
     }
-    /*
-        private void addButtons() {
-            String[][] arr = view.getController().getArr();
 
-            for (int i = 0; i < arr.length; ++i) {
-                String s = arr[i];
-                JButton button = new JButton(s);
-                button.addKeyListener(this);
-                button.setOpaque(true);
-                button.setBorderPainted(false);
-                button.setForeground(Color.BLACK);
-                button.setBackground(Color.LIGHT_GRAY);
-                button.setVisible(true);
-                this.add(button);
-                view.getController().getButtonArr().add(button);
-            }
-        }
-
+    /**
+     * Highlights a button to indicate it has been pressed.
+     * @param lightUpButton The button to be highlighted.
      */
     public void makeLitButton(JButton lightUpButton) {
         lightUpButton.setBackground(Color.YELLOW);
@@ -92,15 +71,12 @@ public class GamePanel extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // System.out.println("You typed: "+e.getExtendedKeyCode());
-        // System.out.println(e.getSource().toString());
         if (controller.isGamemode()) {
             for (int i = 0; i < controller.getGm2().getRandomChars1().length; i++) {
                 if ((String.valueOf(e.getKeyChar()).equalsIgnoreCase(String.valueOf(controller.getGm2().getRandomChars1()[i]))) && controller.getGm2().isTurn()) {
                     //Skickas meddelande till GUI om någon förändring
                     controller.getGm2().setTurn(false);
                     controller.getGm2().runRandomizer2();
-//                  controller.getGm2().nextTurn();
                 }
             }
             for (int i = 0; i < controller.getGm2().getRandomChars2().length; i++) {
@@ -108,12 +84,15 @@ public class GamePanel extends JPanel implements KeyListener {
                     //Skickas meddelande till GUI om någon förändring
                     controller.getGm2().setTurn(true);
                     controller.getGm2().runRandomizer();
-//                controller.getGm2().nextTurn();
                 }
             }
         }
     }
 
+    /**
+     * Invoked when a key has been pressed.
+     * @param e The KeyEvent object representing the key press event.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("You pressed: "+KeyEvent.getKeyText(e.getKeyCode()));
@@ -139,17 +118,16 @@ public class GamePanel extends JPanel implements KeyListener {
                         button.setVisible(true);
                         view.getController().setKeyCount(view.getController().getKeyCount() + 1);
                         view.getCountDownPanel().setCount(5);
-                        //  view.getCountDownPanel().startGameTimer();
 
-
-                    } else if (button.equals(view.getController().getLitButton2())) {
+                    }
+                    else if (button.equals(view.getController().getLitButton2())) {
                         button.setBackground(Color.BLUE);
                         button.setOpaque(true);
                         button.setVisible(true);
                         view.getController().setKeyCount(view.getController().getKeyCount() + 1);
                         view.getCountDownPanel().setCount(5);
-                        // view.getCountDownPanel().startGameTimer();
-                    } else {
+                    }
+                    else {
                         button.setBackground(Color.RED);
                         button.setOpaque(true);
                         button.setVisible(true);
@@ -157,27 +135,13 @@ public class GamePanel extends JPanel implements KeyListener {
                     break;
                 }
             }
-        }/*
-        if (controller.isGamemode()) {
-            if ((controller.getGm2().getRandomChars1()[controller.getGm2().getIndex()] == e.getKeyChar()) && controller.getGm2().isTurn()) {
-                //Skickas meddelande till GUI om någon förändring
-                controller.getGm2().setTurn(false);
-                controller.getGm2().runRandomizer();
-    //                controller.getGm2().nextTurn();
-            } else if ((controller.getGm2().getRandomChars2()[controller.getGm2().getIndex()] == e.getKeyChar()) && !controller.getGm2().isTurn()) {
-                //Skickas meddelande till GUI om någon förändring
-                controller.getGm2().setTurn(true);
-                controller.getGm2().runRandomizer();
-    //                controller.getGm2().nextTurn();
-            } /*else {
-                if (controller.getGm2().isTurn()) {
-                    JOptionPane.showMessageDialog(null, "player1 lost");
-                } else
-                    JOptionPane.showMessageDialog(null, "player2 lost");
-            }
-            */
         }
+    }
 
+    /**
+     * Invoked when a key has been released.
+     * @param e The KeyEvent object representing the key release event.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("You released "+e.getKeyChar());
@@ -201,14 +165,11 @@ public class GamePanel extends JPanel implements KeyListener {
                     } else {
                         JOptionPane.showMessageDialog(null, "You missed the button, You lose!");
                         String name = JOptionPane.showInputDialog("Write your name");
-                        //view.getScoreBoardPanel().addNewScore(name, view.getController().getKeyCount());
                         try {
                             view.getController().newScore(name, view.getController().getKeyCount());
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
-                        // TODO: Skicka tillbaka till en startskärm.
-                        //   view.getController().startCountDown();
                         new StartMenu();
                         this.setVisible(false);
                     }
@@ -230,7 +191,5 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
             }
         }
-
-
     }
 }

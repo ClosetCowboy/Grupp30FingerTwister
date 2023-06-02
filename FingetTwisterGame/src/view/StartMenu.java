@@ -11,6 +11,10 @@ public class StartMenu {
     private View view;
     private JRadioButton hardChoise;
     private boolean difficulty = false;
+
+    /**
+     * Constructs a StartMenu object.
+     */
     public StartMenu() {
         JFrame frame = new JFrame();
         frame.setLayout(null);
@@ -23,14 +27,11 @@ public class StartMenu {
         JRadioButton easyChoise = new JRadioButton("Easy");
         easyChoise.setBounds(850,250,100,60);
         easyChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        easyChoise.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == easyChoise){
-                    easyChoise.setSelected(true);
-                    hardChoise.setSelected(false);
-                    difficulty = false;
-                }
+        easyChoise.addActionListener(e -> {
+            if (e.getSource() == easyChoise){
+                easyChoise.setSelected(true);
+                hardChoise.setSelected(false);
+                difficulty = false;
             }
         });
         easyChoise.setEnabled(true);
@@ -40,14 +41,11 @@ public class StartMenu {
         hardChoise = new JRadioButton("Hard");
         hardChoise.setBounds(850,300,100,60);
         hardChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        hardChoise.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == hardChoise){
-                    hardChoise.setSelected(true);
-                    easyChoise.setSelected(false);
-                    difficulty = true;
-                }
+        hardChoise.addActionListener(e -> {
+            if (e.getSource() == hardChoise){
+                hardChoise.setSelected(true);
+                easyChoise.setSelected(false);
+                difficulty = true;
             }
         });
         frame.add(hardChoise);
@@ -75,9 +73,6 @@ public class StartMenu {
         frame.add(scoreboard);
 
 
-
-
-
         JLabel multiPlayerDescription = new JLabel(
                 "<html>In this version of Twister, you will play against one opponent.<br>"
                         + "The game will prompt you to press various keys on your keyboard that correspond to different body parts and colors.<br>"
@@ -100,20 +95,14 @@ public class StartMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        multiplayerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent multiPlayerPressed) {
-                frame.setVisible(false);
-                new Controller(true, difficulty);
-                //new VersionPanel(true, difficulty); ToDo Detta ska tillbaka senare!!!
-            }
+        multiplayerButton.addActionListener(multiPlayerPressed -> {
+            frame.setVisible(false);
+            new Controller(true, difficulty);
         });
 
-        singlePlayerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent singlePlayerPressed) {
-                frame.setVisible(false);
-                new Controller(false, difficulty);
-                //new VersionPanel(false, difficulty); ToDo Detta ska tillbaka senare!!!
-            }
+        singlePlayerButton.addActionListener(singlePlayerPressed -> {
+            frame.setVisible(false);
+            new Controller(false, difficulty);
         });
     }
 }

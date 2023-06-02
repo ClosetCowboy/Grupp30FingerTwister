@@ -14,18 +14,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class ScoreBoardViewer extends JFrame implements Runnable {
+
+    /**
+     * The main method creates a new instance of ScoreBoardViewer.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[]args){
         new ScoreBoardViewer();
     }
+    private View view;
+    private Scoreboard scoreboard;
     private JPanel panel;
     private JTextArea textArea;
     private int count;
-    private Scoreboard scoreboard;
-    private View view;
 
+    /**
+     * Constructs a ScoreBoardViewer object.
+     *
+     * @throws HeadlessException if the graphics environment is not available
+     */
     public ScoreBoardViewer() throws HeadlessException {
         this.view = view;
-        // super("ScoreBoard");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panel = new JPanel();
         this.textArea = new JTextArea();
@@ -47,6 +57,11 @@ public class ScoreBoardViewer extends JFrame implements Runnable {
         thread.start();
     }
 
+    /**
+     * Sets the text area with the content of the scoreboard.
+     *
+     * @throws IOException if an I/O error occurs while reading the scoreboard
+     */
     public void setTextArea() throws IOException {
         String name;
         String score;
@@ -57,31 +72,33 @@ public class ScoreBoardViewer extends JFrame implements Runnable {
             System.out.println(name);
             score = String.valueOf(scoreboard.getScoreBoard().get(i).getScore());
             System.out.println(score);
-            // textfield = textfield + "Name: " + name + "Score: " + score + "\n";
             textfield = textfield + String.format("%12s, %10s", name , score) + "\n";
         }
         this.textArea.setText(textfield);
         System.out.println("TextField" + "\n" + textfield);
     }
 
+    /**
+     * Runs a continuous loop to update the text area periodically.
+     */
     public void run() {
-        FileReader fr = null;
+        FileReader fileReader = null;
 
         while(true) {
             String str = "";
             this.count = 0;
             try {
-                fr = new FileReader("ScoreBoard.txt");
-                BufferedReader br = new BufferedReader(fr);
+                fileReader = new FileReader("ScoreBoard.txt");
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-                for (int i = 0; i < br.read(); ++i) {
+                for (int i = 0; i < bufferedReader.read(); ++i) {
 
-                    str = str + br.readLine() + "\n";
+                    str = str + bufferedReader.readLine() + "\n";
                     ++this.count;
                 }
 
-                fr.close();
-                br.close();
+                fileReader.close();
+                bufferedReader.close();
             } catch (IOException var5) {
                 var5.printStackTrace();
             }

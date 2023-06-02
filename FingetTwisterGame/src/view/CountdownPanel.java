@@ -10,14 +10,19 @@ import java.util.Objects;
 
 public class CountdownPanel extends JPanel implements ActionListener  {
 
+    private View view;
+    private Controller controller;
+    private GameMode2 gm2;
     private Timer timer;
     private JLabel countdownLabel;
-    private Controller controller;
-    private View view;
-    private GameMode2 gm2;
-
     private int count = 5;
 
+    /**
+     * Constructs a CountdownPanel object with the specified View and GameMode2.
+     *
+     * @param view the View object
+     * @param gm2 the GameMode2 object
+     */
     public CountdownPanel(View view, GameMode2 gm2) {
         this.view = view;
         this.gm2 = gm2;
@@ -61,6 +66,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
     }
     // Create the timer
 
+
     public void startGameTimer() {
         count = 5;
         timer = new Timer(1000, new ActionListener() {
@@ -82,12 +88,11 @@ public class CountdownPanel extends JPanel implements ActionListener  {
         timer.start();
         setVisible(true);
     }
-    /*
-    public void startCountDown() {
-        this.timer.start();
-        this.thread = new Thread(this);
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
-*/
 
     public int getCount() {
         return count;
@@ -96,17 +101,9 @@ public class CountdownPanel extends JPanel implements ActionListener  {
         this.count = count;
     }
 
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
     public JLabel getCountdownLabel() {
         return countdownLabel;
     }
-
     public void setCountdownLabel(JLabel countdownLabel) {
         this.countdownLabel = countdownLabel;
     }

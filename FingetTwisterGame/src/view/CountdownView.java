@@ -14,10 +14,15 @@ import javax.swing.*;
 
 
 public class CountdownView extends JFrame implements ActionListener {
+    private Controller controller;
     private Timer timer;
     private JLabel countdownLabel;
-    private Controller controller;
 
+    /**
+     * Constructs a CountdownView object with the specified Controller.
+     *
+     * @param controller the Controller object
+     */
     public CountdownView(Controller controller) {
         super("Countdown Timer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

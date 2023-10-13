@@ -25,7 +25,7 @@ public class StartMenu {
         frame.add(multiplayerButton);
 
         JRadioButton easyChoise = new JRadioButton("Easy");
-        easyChoise.setBounds(850,250,100,60);
+        easyChoise.setBounds(950,450,100,60);
         easyChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
         easyChoise.addActionListener(e -> {
             if (e.getSource() == easyChoise){
@@ -39,7 +39,7 @@ public class StartMenu {
 
 
         hardChoise = new JRadioButton("Hard");
-        hardChoise.setBounds(850,300,100,60);
+        hardChoise.setBounds(950,500,100,60);
         hardChoise.setFont(new Font("SansSerif", Font.PLAIN, 24));
         hardChoise.addActionListener(e -> {
             if (e.getSource() == hardChoise){

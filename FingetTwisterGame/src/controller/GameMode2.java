@@ -30,6 +30,8 @@ public class GameMode2 implements Runnable {
     private boolean turn = true; // Player 1 = true && player 2 = false
     private boolean difficulty;
     private int intDifficulty;
+    private int delayDifficulty;
+    private int timerDelay;
 
 
     /**
@@ -203,8 +205,6 @@ public class GameMode2 implements Runnable {
     public char[] getRandomChars2() {
         return randomChars2;
     }
-
-
     public boolean isTurn() {
         return turn;
     }

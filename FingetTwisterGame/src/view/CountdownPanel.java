@@ -39,37 +39,16 @@ public class CountdownPanel extends JPanel implements ActionListener  {
         this.add(countdownLabel);
     }
 
-    public void startShortTimer(){
+
+    public void startGameTimer(boolean difficulty) {
+        int delay;
         count = 5;
-        timer = new Timer(1000, new ActionListener() {
 
-
-            public void actionPerformed(ActionEvent e) {
-                count--;
-                if (count >= 1) {
-                    countdownLabel.setText(String.valueOf(count));
-                }//else if(Objects.equals(countdownLabel.getText(), "0")){
-                    //gm2.timeIsUpLoserEvent();
-                //}
-                 else
-                {
-                    timer.stop();
-                    // view.getController().startGame();
-
-                    countdownLabel.setText("0");
-                }
-
-            }
-        });
-        timer.start();
-        setVisible(true);
-    }
-    // Create the timer
-
-
-    public void startGameTimer() {
-        count = 5;
-        timer = new Timer(500, new ActionListener() {
+        if (difficulty){
+             delay = 300;
+        }
+        else delay = 600;
+        timer = new Timer(delay, new ActionListener() {
 
 
             public void actionPerformed(ActionEvent e) {
@@ -94,6 +73,8 @@ public class CountdownPanel extends JPanel implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
 
     }
+
+
 
     public int getCount() {
         return count;

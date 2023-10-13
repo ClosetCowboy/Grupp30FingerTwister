@@ -52,7 +52,7 @@ public class Controller implements ActionListener, Runnable {
     public void startGame() {
         this.litButton1 = this.randomize_new_button();
         this.litButton2 = this.randomize_new_button();
-        view.getCountDownPanel().startGameTimer();
+        view.getCountDownPanel().startGameTimer(difficulty);
 
         while(Objects.equals(this.litButton2.getText(), this.litButton1.getText())){
             this.litButton2 = this.randomize_new_button();

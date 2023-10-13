@@ -137,8 +137,9 @@ public class GameModePanel extends JPanel implements ActionListener {
                 view.getGamePanel().transferFocus();
                 if (view.getController().isGamemode()){
                     view.getController().setGm2(new GameMode2(view, this.controller, controller.isDifficulty()));
-                }else view.getController().startGame();
-
+                }else {
+                    view.getController().startGame();
+                }
             }
         }
     }

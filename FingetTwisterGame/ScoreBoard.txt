@@ -2,3 +2,25 @@
 420420
  Hannes
 16
+ Theo
+10
+ setcountincrement
+10
+ Test1
+9
+ NyTypeRushTimeup
+6
+ T
+5
+ Test3
+3
+ Test2
+2
+ Theodd
+1
+ null
+0
+ b
+0
+ damn
+0

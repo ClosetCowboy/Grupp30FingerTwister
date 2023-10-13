@@ -39,45 +39,21 @@ public class CountdownPanel extends JPanel implements ActionListener  {
         this.add(countdownLabel);
     }
 
-    public void startShortTimer(){
-        count = 5;
-        timer = new Timer(1000, new ActionListener() {
-
-
-            public void actionPerformed(ActionEvent e) {
-                count--;
-                if (count >= 1) {
-                    countdownLabel.setText(String.valueOf(count));
-                }//else if(Objects.equals(countdownLabel.getText(), "0")){
-                    //gm2.timeIsUpLoserEvent();
-                //}
-                 else
-                {
-                    timer.stop();
-                    // view.getController().startGame();
-
-                    countdownLabel.setText("0");
-                }
-
-            }
-        });
-        timer.start();
-        setVisible(true);
-    }
-    // Create the timer
-
 
     public void startGameTimer() {
         count = 5;
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(500, new ActionListener() {
 
 
             public void actionPerformed(ActionEvent e) {
+                System.out.println("ActionPreformed" + count);
                 count--;
                 if (count >= 1) {
                     countdownLabel.setText(String.valueOf(count));
                 } else {
                     timer.stop();
+                    System.out.println("Timer is out");
+                    view.setTimesUp(true);
                     // view.getController().startGame();
 
                     countdownLabel.setText("0");
@@ -86,7 +62,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
             }
         });
         timer.start();
-        setVisible(true);
+        this.setVisible(true);
     }
 
     @Override
@@ -97,8 +73,12 @@ public class CountdownPanel extends JPanel implements ActionListener  {
     public int getCount() {
         return count;
     }
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount() {
+        count++;
+    }
+
+    public void incrementTime(int increase){
+        count = count + 2;
     }
 
     public JLabel getCountdownLabel() {

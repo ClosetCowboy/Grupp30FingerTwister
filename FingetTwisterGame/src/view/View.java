@@ -66,6 +66,7 @@ public class View extends JFrame{
     public boolean isTimesUp() {
         return this.timesUp;
     }
+
     public void setTimesUp(boolean timesUp) {
         this.timesUp = timesUp;
     }

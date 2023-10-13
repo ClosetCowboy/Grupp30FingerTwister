@@ -103,6 +103,7 @@ public class StartMenu {
         singlePlayerButton.addActionListener(singlePlayerPressed -> {
             frame.setVisible(false);
             new Controller(false, difficulty);
+
         });
     }
 }

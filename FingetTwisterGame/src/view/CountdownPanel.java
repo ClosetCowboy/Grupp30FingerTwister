@@ -69,7 +69,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
 
     public void startGameTimer() {
         count = 5;
-        timer = new Timer(600, new ActionListener() {
+        timer = new Timer(500, new ActionListener() {
 
 
             public void actionPerformed(ActionEvent e) {

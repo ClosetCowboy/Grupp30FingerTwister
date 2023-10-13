@@ -61,17 +61,6 @@ public class StartMenu {
         titel.setBounds(700, 40, 800 , 120);
         frame.add(titel);
 
-        JLabel scoreboardTitle = new JLabel("Scoreboard");
-        Font scoreboardfont = new Font("SansSerif", Font.PLAIN, 50);
-        scoreboardTitle.setFont(scoreboardfont);
-        scoreboardTitle.setBounds(1470, 170, 400, 50);
-        frame.add(scoreboardTitle);
-
-
-        JTextArea scoreboard = new JTextArea();
-        scoreboard.setBounds(1400, 230, 400, 700);
-        frame.add(scoreboard);
-
 
         JLabel multiPlayerDescription = new JLabel(
                 "<html>In this version of Twister, you will play against one opponent.<br>"

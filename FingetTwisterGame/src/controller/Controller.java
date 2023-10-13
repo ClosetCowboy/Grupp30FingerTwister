@@ -94,13 +94,7 @@ public class Controller implements ActionListener, Runnable {
      * @param score the score achieved by the player.
      * @throws IOException if an I/O error occurs while writing to the file.
      */
-    public void setNewScore(String name, int score) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("ScoreBoard.txt", true));
-        String playerNameScore = String.format(" Name: %s Score: %d", name, score);
-        bufferedWriter.write(playerNameScore);
-        bufferedWriter.newLine();
-        bufferedWriter.close();
-    }
+
 
     /**
      * Updates the lit buttons when a button is clicked.

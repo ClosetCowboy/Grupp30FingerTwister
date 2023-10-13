@@ -51,7 +51,6 @@ public class View extends JFrame{
         if (!controller.isGamemode()){
             this.add((scoreBoardPanel),BorderLayout.WEST);
             this.add(startingPanel, BorderLayout.NORTH);
-            this.add((scoreBoardPanel),BorderLayout.WEST);
             this.add(countDownPanel, BorderLayout.EAST);
         }
     }

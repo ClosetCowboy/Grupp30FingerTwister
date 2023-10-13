@@ -69,7 +69,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
 
     public void startGameTimer() {
         count = 5;
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(600, new ActionListener() {
 
 
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +78,7 @@ public class CountdownPanel extends JPanel implements ActionListener  {
                     countdownLabel.setText(String.valueOf(count));
                 } else {
                     timer.stop();
+                    view.setTimesUp(true);
                     // view.getController().startGame();
 
                     countdownLabel.setText("0");
@@ -97,8 +98,8 @@ public class CountdownPanel extends JPanel implements ActionListener  {
     public int getCount() {
         return count;
     }
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount() {
+        this.count = count + 2;
     }
 
     public JLabel getCountdownLabel() {

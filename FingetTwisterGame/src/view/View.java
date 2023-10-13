@@ -40,6 +40,7 @@ public class View extends JFrame{
         gamePanel = new GamePanel(this, controller);
         scoreBoardPanel = new ScoreboardPanel(this);
         space = new JLabel();
+        countDownPanel = new CountdownPanel(this, controller.getGm2());
         space.setPreferredSize(new Dimension(550,800));
     }
 
@@ -49,6 +50,9 @@ public class View extends JFrame{
         this.add(space,BorderLayout.WEST);
         if (!controller.isGamemode()){
             this.add((scoreBoardPanel),BorderLayout.WEST);
+            this.add(startingPanel, BorderLayout.NORTH);
+            this.add((scoreBoardPanel),BorderLayout.WEST);
+            this.add(countDownPanel, BorderLayout.EAST);
         }
     }
 

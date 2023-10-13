@@ -100,14 +100,18 @@ public class GamePanel extends JPanel implements KeyListener {
         if (!controller.isGamemode()) {
 
             if (view.isTimesUp()) {
-                String name = JOptionPane.showInputDialog(null, "Times Up! Your score = " + view.getController().getKeyCount() + " Enter your name: ");
+                JOptionPane.showMessageDialog(null, "Times Up! Your score = " + view.getController().getKeyCount());
+                String name = JOptionPane.showInputDialog("Write your name");
                 try {
-                    view.getController().setNewScore(name, view.getController().getKeyCount());
-                } catch (IOException var4) {
-                    throw new RuntimeException(var4);
+                    view.getController().newScore(name, view.getController().getKeyCount());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
+                new StartMenu();
+                this.setVisible(false);
 
             }
+
 
 
             for (JButton button : view.getController().getButtonArr()) {
@@ -117,7 +121,7 @@ public class GamePanel extends JPanel implements KeyListener {
                         button.setOpaque(true);
                         button.setVisible(true);
                         view.getController().setKeyCount(view.getController().getKeyCount() + 1);
-                        view.getCountDownPanel().setCount(5);
+                        view.getCountDownPanel().setCount();
 
                     }
                     else if (button.equals(view.getController().getLitButton2())) {
@@ -125,7 +129,7 @@ public class GamePanel extends JPanel implements KeyListener {
                         button.setOpaque(true);
                         button.setVisible(true);
                         view.getController().setKeyCount(view.getController().getKeyCount() + 1);
-                        view.getCountDownPanel().setCount(5);
+                        view.getCountDownPanel().setCount();
                     }
                     else {
                         button.setBackground(Color.RED);
